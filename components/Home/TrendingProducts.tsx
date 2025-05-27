@@ -2,12 +2,14 @@ import React from "react";
 import ListingSection from "./ListingSection";
 import { featuredProducts } from "@/lib/Menudata";
 
-const ShopByCollection = () => {
+const TrendingProducts = () => {
   const listingData = {
-    heading: "Shop by Collection",
+    heading: "Trending Now",
     subHeading:
-      "Explore our curated collections that cater to every style and occasion.",
+      "Discover Your Style: Navigate by Category for Effortless Shopping!",
     listing: [...featuredProducts],
+    buttonText: "View all Trending",
+    buttonLink: "/trendings",
   };
   return (
     <div>
@@ -16,4 +18,4 @@ const ShopByCollection = () => {
   );
 };
 
-export default ShopByCollection;
+export default TrendingProducts;

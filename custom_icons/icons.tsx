@@ -144,3 +144,28 @@ export const DehliveryIcon: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+export const StarIcon = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      className="star-container  yotpo-sr-star-full"
+      width="12"
+      height="12 "
+    >
+      <defs>
+        <linearGradient id="yotpo_stars_gradient_0.9852281051075236">
+          <stop offset="100%" stopColor="#E7721B"></stop>
+          <stop stopOpacity="1" offset="100%" stopColor="#FFFFFF"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        d="M9 14.118L14.562 17.475L13.086 11.148L18 6.891L11.529 6.342L9 0.375L6.471 6.342L0 6.891L4.914 11.148L3.438 17.475L9 14.118Z"
+        stroke="#E7721B"
+        fill="url('#yotpo_stars_gradient_0.9852281051075236')"
+      ></path>
+    </svg>
+  );
+};

@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import FallbackImage from "./FallbackImage";
 
 interface Props {
   item: {
@@ -11,9 +13,9 @@ interface Props {
 
 const ListingCard: React.FC<Props> = ({ item }) => {
   return (
-    <div className="group space-y-2">
+    <Link href={item.url} className="block group space-y-2">
       <div className="aspect-[4/5.5] overflow-hidden">
-        <Image
+        <FallbackImage
           src={item.image}
           alt="Category Image"
           height={600}
@@ -22,7 +24,7 @@ const ListingCard: React.FC<Props> = ({ item }) => {
         />
       </div>
       <h2 className="text-[16px] text-center font-light ">{item.text}</h2>
-    </div>
+    </Link>
   );
 };
 

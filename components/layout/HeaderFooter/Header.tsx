@@ -39,7 +39,9 @@ const Header: React.FC<Props> = ({ isHome }) => {
 
   return (
     <div
-      className={`relative w-full transition-all ease-in-out duration-300 ${
+      className={`relative w-full transition-all ease-in-out ${
+        !isHome && "shadow-md"
+      } duration-300 ${
         toggle || hasScrolled
           ? "bg-white text-black"
           : "bg-transparent text-white"
@@ -56,11 +58,11 @@ const Header: React.FC<Props> = ({ isHome }) => {
         <div className=" flex items-center gap-5">
           <Link href={"/"}>
             <Image
-              src="https://www.thejacketmaker.com/cdn/shop/files/512-logo-black_1e5d3070-b9c0-4dc5-ac39-8ea250f9b448_120x.svg?v=1691223671"
-              alt="Logo"
+              src={"/Logo/artisan_hide.webp"}
+              alt="Artisan Hide"
               width={200}
               height={200}
-              className={`h-9 lg:h-12 transition-all ease-in-out duration-300 w-auto object-contain  ${
+              className={`h-9 lg:h-11 transition-all ease-in-out duration-300 w-auto object-contain  ${
                 toggle || hasScrolled ? "" : "filter invert brightness-0"
               }`}
             />
@@ -117,6 +119,11 @@ const Header: React.FC<Props> = ({ isHome }) => {
           <CartDrawer />
         </div>
       </nav>
+
+      {activeMenu && (
+        <div className="bg-black/75 absolute top-full left-0 w-full h-screen"></div>
+      )}
+
       {/* MEGAMENU */}
       <AnimatePresence>
         {activeMenu?.megamenu && (
@@ -124,7 +131,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
             initial={{ height: 0 }}
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden border absolute top-full left-0 w-full bg-white z-50"
             onMouseEnter={() => setToggle(true)}
             onMouseLeave={() => {

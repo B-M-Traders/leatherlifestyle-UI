@@ -8,8 +8,8 @@ export const menuItems = [
         type: "list",
         title: "Shop by Category",
         lists: [
-          { label: "Leather Jackets", url: "/" },
-          { label: "Leather Bottoms", url: "/" },
+          { label: "Leather Jackets", url: "/category/men/leather-jackets" },
+          { label: "Leather Bottoms", url: "/category/men/leather-bottoms" },
           { label: "Leather Tops", url: "/" },
           { label: "Leather Blazers", url: "/" },
           { label: "Leather Coats", url: "/" },

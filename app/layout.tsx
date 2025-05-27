@@ -4,6 +4,7 @@ import HeaderWrapper from "@/components/layout/HeaderFooter/HeaderWrapper";
 import { Bricolage_Grotesque } from "next/font/google";
 import BottomTabs from "@/components/layout/BottomTabs/BottomTabs";
 import NextTopLoader from "nextjs-toploader";
+import Footer from "@/components/layout/HeaderFooter/Footer";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -50,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${BricolageGrotesque.className} antialiased pb-[80px] lg:pb-0`}
+        className={`${BricolageGrotesque.className} antialiased pb-[55px] lg:pb-0`}
       >
         {/* <ThemeProvider
           attribute="class"
@@ -58,11 +59,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         > */}
-        <NextTopLoader color="black" showSpinner={false} />
+        <NextTopLoader color="gray" showSpinner={false} />
         <HeaderWrapper />
         {children}
         <BottomTabs />
-        {/* <Footer /> */}
+        <Footer />
         {/* </ThemeProvider> */}
       </body>
     </html>

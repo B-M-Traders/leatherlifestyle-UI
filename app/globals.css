@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .templateContainer {
-  @apply max-w-[1500px] mx-auto px-5 md:px-10 lg:px-14;
+  @apply max-w-[1500px] mx-auto px-4 md:px-10 lg:px-14;
 }
 
 @layer base {
@@ -142,4 +142,8 @@
 .hover-class:hover::after {
   left: 0;
   width: 100%;
+}
+
+.listHoverAnimation {
+  @apply transition-all duration-200 ease-in-out hover:pl-1;
 }

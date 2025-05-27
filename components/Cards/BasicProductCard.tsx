@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import FallbackImage from "./FallbackImage";
 
 interface Props {
   item: {
@@ -15,7 +16,7 @@ const BasicProductCard: React.FC<Props> = ({ item }) => {
     <Link href={item.url} className="block group">
       <div>
         <div className="aspect-[4/5] overflow-hidden">
-          <Image
+          <FallbackImage
             className=" bg-gray-50 group-hover:scale-105 group-hover:rotate-2 transition-all ease-in-out duration-300 h-full w-full object-cover"
             src={item.image}
             alt="Product Image"

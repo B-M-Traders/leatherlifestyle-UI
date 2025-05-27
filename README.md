@@ -1,4 +1,5 @@
 ENV VARIABLES
 
 FRONTEND_URL=http://localhost:3000
+
 BACKEND_URL=
