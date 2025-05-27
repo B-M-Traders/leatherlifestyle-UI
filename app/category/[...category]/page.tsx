@@ -1,9 +1,13 @@
 import ProductContainer from "@/components/collection_category/ProductContainer";
 import React from "react";
 
+interface PageProps {
+  params: Promise<{ category: string[] }>;
+}
+
 const getProducts = async (category: string[]) => {};
 
-const Category = async ({ params }: { params: { category: string[] } }) => {
+const Category: React.FC<PageProps> = async ({ params }) => {
   const categorySegments = (await params).category;
   // const data = await getProducts(categorySegments);
   const lastCategory = categorySegments[categorySegments.length - 1];
