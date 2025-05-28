@@ -131,7 +131,7 @@
 .hover-class::after {
   content: "";
   position: absolute;
-  bottom: -25px;
+  bottom: -23px;
   left: 50%;
   width: 0;
   height: 3px;

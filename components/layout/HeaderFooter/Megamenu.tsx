@@ -5,9 +5,10 @@ import React, { act } from "react";
 
 interface Props {
   activeMenu: any;
+  handleClick: any;
 }
 
-const Megamenu: React.FC<Props> = ({ activeMenu }) => {
+const Megamenu: React.FC<Props> = ({ activeMenu, handleClick }) => {
   return (
     <div className="p-10 text-black max-w-7xl mx-auto grid grid-cols-4 gap-5">
       {activeMenu?.megamenuItems?.map((item: any, index: number) => (
@@ -20,7 +21,12 @@ const Megamenu: React.FC<Props> = ({ activeMenu }) => {
                 </h3>
                 <ul className="space-y-4">
                   {item.lists.map((item: any, index: number) => (
-                    <Link className="block" key={index} href={item.url}>
+                    <Link
+                      onClick={handleClick}
+                      className="block"
+                      key={index}
+                      href={item.url}
+                    >
                       <li
                         key={index}
                         className={`text-sm hover:text-templateBrown tracking-wide ${
@@ -35,7 +41,9 @@ const Megamenu: React.FC<Props> = ({ activeMenu }) => {
               </div>
             )}
             {item.type === "product" && (
-              <BasicProductCard item={item as any} key={index} />
+              <div onClick={handleClick} key={index}>
+                <BasicProductCard item={item as any} />
+              </div>
             )}
           </>
         </div>

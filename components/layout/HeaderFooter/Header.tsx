@@ -37,6 +37,10 @@ const Header: React.FC<Props> = ({ isHome }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHome, hasScrolled]);
 
+  const handleClick = () => {
+    setActiveMenu(null);
+  };
+
   return (
     <div
       className={`relative w-full transition-all ease-in-out ${
@@ -87,7 +91,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
                     <ChevronDown size={14} />
                   </span>
                 ) : (
-                  <Link className="inline-block " href={item.url || "#"}>
+                  <Link className="inline-block" href={item.url || "#"}>
                     <span
                       className="flex hover-class px-2.5 items-center gap-0.5 "
                       onMouseEnter={() => {
@@ -139,7 +143,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
               setActiveMenu(null);
             }}
           >
-            <Megamenu activeMenu={activeMenu} />
+            <Megamenu activeMenu={activeMenu} handleClick={handleClick} />
           </motion.div>
         )}
       </AnimatePresence>

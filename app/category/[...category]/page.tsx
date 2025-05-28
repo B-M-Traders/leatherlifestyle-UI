@@ -1,3 +1,5 @@
+import Breadcrumb from "@/components/BasicComps/Breadcrumb ";
+import FilterAndSort from "@/components/collection_category/FilterAndSort";
 import ProductContainer from "@/components/collection_category/ProductContainer";
 import React from "react";
 
@@ -13,12 +15,21 @@ const Category: React.FC<PageProps> = async ({ params }) => {
   const lastCategory = categorySegments[categorySegments.length - 1];
 
   return (
-    <div className="templateContainer space-y-6 md:space-y-12 lg:space-y-16 py-6 md:py-10 lg:py-14">
-      <h1 className="text-center text-xl lg:text-3xl capitalize text-templateBrown">
-        {lastCategory.replace(/-/g, " ")}
-      </h1>
+    <div className="templateContainer pb-12">
+      <Breadcrumb
+        heading={lastCategory.replace(/-/g, " ")}
+        breadCrumb={["Home", "Category", ...categorySegments]}
+      />
 
-      <div>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-sm font-light">30 Products</span>
+          </div>
+          <div>
+            <FilterAndSort />
+          </div>
+        </div>
         <ProductContainer />
       </div>
     </div>

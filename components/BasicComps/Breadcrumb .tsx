@@ -9,23 +9,22 @@ interface BreadcrumbProps {
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ heading, breadCrumb }) => {
   return (
     <div className="overflow-hidden border-t border-white/10 relative">
-      <div className="absolute inset-0 bg-white"></div>
-      <div className="text-center Container py-10 relative md:py-8 lg:py-20 text-templateBrown space-y-2">
-        <h1 className="text-2xl lg:text-3xl tracking-wide font-semibold uppercase">
+      <div className="text-center Container py-10 relative md:py-8 lg:py-14 text-templateBrown space-y-2">
+        <h1 className="text-2xl lg:text-3xl tracking-wide font-normal capitalize">
           {heading}
         </h1>
-        <ul className="flex flex-wrap text-sm items-center gap-1.5 justify-center text-templateBrown">
+        <ul className="flex flex-wrap text-xs md:text-sm items-center gap-0.5 md:gap-1 justify-center text-templateBrown">
           {breadCrumb.map((item, index) => (
             <li
               key={index}
-              className={`flex items-center gap-1.5 font- tracking-wide capitalize ${
+              className={`flex items-center gap-0.5 md:gap-1.5 font- tracking-wide capitalize ${
                 index === breadCrumb.length - 1
-                  ? "text-templateOrange font-"
+                  ? "text-templateBrown underline underline-offset-2  font-medium"
                   : ""
               }`}
             >
               {index === 0 ? (
-                <Link href="/" className="hover:text-templateOrange">
+                <Link href="/" className="hover:text-templateBrown">
                   {item}
                 </Link>
               ) : (
@@ -34,15 +33,15 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ heading, breadCrumb }) => {
               {index < breadCrumb.length - 1 && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="1"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide mb-0.5 lucide-chevron-right"
+                  className="lucide h-4 md:h-5 lucide-chevron-right"
                 >
                   <path d="m9 18 6-6-6-6" />
                 </svg>
