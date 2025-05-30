@@ -1,17 +1,17 @@
 "use client";
-import { useFormatAmount } from "@/hooks/useFormatAmount ";
 import { Loader2, LoaderCircle, Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import CartListCard from "../Cards/CartListCard";
+import { useFormat } from "@/hooks/useFormat";
 
 interface CartListProps {
   cartData?: {}[];
 }
 
 const CartList: React.FC<CartListProps> = ({ cartData = [{}, {}] }) => {
-  const { formatAmount } = useFormatAmount();
+  const { formatAmount } = useFormat();
   return (
     <div className="flex flex-col space-y-4 justify-between h-full w-full">
       {/* Cart Header */}

@@ -1,5 +1,4 @@
-
-export const useFormatAmount = () => {
+export const useFormat = () => {
   const formatAmount = (
     amount: number | string,
     currency: string = "USD",

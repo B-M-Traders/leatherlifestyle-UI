@@ -2,12 +2,12 @@
 import { StarIcon } from "@/custom_icons/icons";
 import React, { useState } from "react";
 import FallbackImage from "./FallbackImage";
-import { useFormatAmount } from "@/hooks/useFormatAmount ";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
+import { useFormat } from "@/hooks/useFormat";
 
 const MainProductCard = () => {
-  const { formatAmount } = useFormatAmount();
+  const { formatAmount } = useFormat();
   const images = ["/product.jpg", "/product2.jpg"];
   const [hovered, setHovered] = useState(false);
 
@@ -19,7 +19,6 @@ const MainProductCard = () => {
         className="overflow-hidden relative aspect-[4/5.5]"
       >
         <Link href={"/product/product_slug"} className="block h-full w-full">
-          {/* Main image */}
           <FallbackImage
             src={images[0]}
             alt="Primary Image"
@@ -29,7 +28,6 @@ const MainProductCard = () => {
               hovered ? "opacity-0" : "opacity-100"
             }`}
           />
-          {/* Hover image */}
           <FallbackImage
             src={images[1]}
             alt="Hover Image"

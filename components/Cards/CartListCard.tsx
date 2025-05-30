@@ -1,11 +1,11 @@
-import { useFormatAmount } from "@/hooks/useFormatAmount ";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import FallbackImage from "./FallbackImage";
+import { useFormat } from "@/hooks/useFormat";
 
 const CartListCard = () => {
-  const { formatAmount } = useFormatAmount();
+  const { formatAmount } = useFormat();
   return (
     <div className="flex gap-2  group">
       {/* Product Image */}
