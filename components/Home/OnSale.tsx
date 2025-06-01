@@ -1,6 +1,7 @@
 import React from "react";
 import ListingSection from "./ListingSection";
 import { featuredProducts } from "@/lib/Menudata";
+import ProductSection from "./ProductSection";
 
 const OnSale = () => {
   const listingData = {
@@ -13,7 +14,7 @@ const OnSale = () => {
   };
   return (
     <div>
-      <ListingSection data={listingData} />
+      <ProductSection data={listingData} />
     </div>
   );
 };

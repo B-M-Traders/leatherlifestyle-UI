@@ -7,10 +7,16 @@ import CartListCard from "../Cards/CartListCard";
 import { useFormat } from "@/hooks/useFormat";
 
 interface CartListProps {
-  cartData?: {}[];
+  cartData: {
+    item_name: string;
+    item_id: number;
+    item_price: number;
+    item_quanity: number;
+    variant_name: string;
+  }[];
 }
 
-const CartList: React.FC<CartListProps> = ({ cartData = [{}, {}] }) => {
+const CartList: React.FC<CartListProps> = ({ cartData }) => {
   const { formatAmount } = useFormat();
   return (
     <div className="flex flex-col space-y-4 justify-between h-full w-full">
@@ -24,9 +30,9 @@ const CartList: React.FC<CartListProps> = ({ cartData = [{}, {}] }) => {
       {/* Cart Items */}
       <div className="h-full relative overflow-y-auto w-full">
         <div className="space-y-4">
-          {cartData.map((item, index) => (
+          {cartData?.map((item, index: number) => (
             <React.Fragment key={index}>
-              <CartListCard />
+              <CartListCard item={item as any} />
             </React.Fragment>
           ))}
         </div>

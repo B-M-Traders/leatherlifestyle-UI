@@ -6,7 +6,7 @@ import FallbackImage from "./FallbackImage";
 interface Props {
   item: {
     url: string;
-    image: string;
+    image: string[];
     text: string;
   };
 }
@@ -16,7 +16,7 @@ const ListingCard: React.FC<Props> = ({ item }) => {
     <Link href={item.url} className="block group space-y-2">
       <div className="aspect-[4/5.5] overflow-hidden">
         <FallbackImage
-          src={item.image}
+          src={item.image[0]}
           alt="Category Image"
           height={600}
           width={400}

@@ -6,60 +6,79 @@ import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { useFormat } from "@/hooks/useFormat";
 
-const MainProductCard = () => {
+interface Props {
+  item: {
+    image: string[];
+    tag: string;
+    name: string;
+    price: number;
+    star: number;
+  };
+}
+
+const MainProductCard: React.FC<Props> = ({ item }) => {
   const { formatAmount } = useFormat();
-  const images = ["/product.jpg", "/product2.jpg"];
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div className=" space-y-2">
+    <div className="space-y-2">
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="overflow-hidden relative aspect-[4/5.5]"
       >
         <Link href={"/product/product_slug"} className="block h-full w-full">
+          {/* Primary Image */}
           <FallbackImage
-            src={images[0]}
+            src={item.image[0]}
             alt="Primary Image"
             height={800}
             width={400}
             className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${
-              hovered ? "opacity-0" : "opacity-100"
+              hovered && item.image.length > 1 ? "opacity-0" : "opacity-100"
             }`}
           />
-          <FallbackImage
-            src={images[1]}
-            alt="Hover Image"
-            height={800}
-            width={400}
-            className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${
-              hovered ? "opacity-100" : "opacity-0"
-            }`}
-          />
+          {/* Hover Image (only if second image exists) */}
+          {item.image.length > 1 && (
+            <FallbackImage
+              src={item.image[1]}
+              alt="Hover Image"
+              height={800}
+              width={400}
+              className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${
+                hovered ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          )}
         </Link>
-        <div className="p-2 absolute top-0  left-0">
-          <div className="cursor-default bg-white text-gray-700 px-2 py-1 text-[11px] font-light z-10">
-            Best Seller
-          </div>
-        </div>
 
+        {/* Badge */}
+        {item.tag && (
+          <div className="p-2 absolute top-0 left-0">
+            <div className="cursor-default bg-white text-gray-700 px-2 py-1 text-[11px] font-light z-10">
+              {item.tag}
+            </div>
+          </div>
+        )}
+
+        {/* Add to Bag Button */}
         <div
           className={`p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${
             hovered ? "translate-y-0 opacity-100" : "opacity-0 translate-y-full"
           }`}
         >
-          <p className="bg-white  hover:bg-templateBrown hover:text-white transition-all ease-in-out duration-300 cursor-pointer uppercase p-2 flex items-center font-medium justify-center gap-2 w-full text-[13px] text-center">
+          <p className="bg-white hover:bg-templateBrown hover:text-white transition-all ease-in-out duration-300 cursor-pointer uppercase p-2 flex items-center font-medium justify-center gap-2 w-full text-[13px] text-center">
             Add to bag <ShoppingCart size={16} strokeWidth={2} />
           </p>
         </div>
       </div>
 
+      {/* Product Details */}
       <Link href={"/product/product_slug"} className="block space-y-1">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
-            {Array(3)
-              .fill(3)
+            {Array(item.star)
+              .fill(item.star)
               .map((_, index) => (
                 <StarIcon key={index} />
               ))}
@@ -68,11 +87,11 @@ const MainProductCard = () => {
             (50)
           </span>
         </div>
-        <h2 className="text-[14px] leading-snug lg:text-[15px] font-medium text-templateBrown">
-          Azura Classic Leather Jacket
+        <h2 className="text-[14px] leading-snug lg:text-[14px] font-light text-templateBrown">
+          {item.name}
         </h2>
-        <span className="block font-medium lg:text-lg">
-          {formatAmount(150)}
+        <span className="block font-light tracking-wide">
+          {formatAmount(item.price)}
         </span>
       </Link>
     </div>

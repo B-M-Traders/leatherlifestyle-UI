@@ -88,18 +88,9 @@ export default function Home() {
       <TrendingProducts />
       <NewArrivals />
       <OnSale />
-      <Image
-        src={
-          "https://lureurban.b-cdn.net/cache/catalog/slides/lure-collection-2024-1920x900.jpg"
-        }
-        alt=""
-        height={600}
-        width={1600}
-        sizes="100vw"
-        className="h-[300px] lg:h-[400px] object-cover object-top w-full"
-      />
-      <Testimonials />
       <GalleryWall items={gallery as any} />
+      <Testimonials />
+
       <HomeBlog />
       <IconWithText data={podData} />
     </div>

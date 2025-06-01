@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { getTargetTriple } from "next/dist/build/swc/generated-native";
 import { useToggleStore } from "@/store/useToggleStore";
+import { useCart } from "@/hooks/useCart";
 
 const BottomTabs = () => {
   const { toggleCartDrawer, toggleMenuDrawer } = useToggleStore();
@@ -49,6 +50,9 @@ const BottomTabs = () => {
         onClick={toggleCartDrawer}
         className="active:bg-gray-100 relative grid gap-1 place-content-center place-items-center"
       >
+        <span className="bg-templateBrown h-5 w-5 text-[11px] text-white rounded-full  absolute top-2 right-4 flex items-center justify-center">
+          2
+        </span>
         <ShoppingBag size={18} strokeWidth={1.5} />
         <span className="text-[11px] font-light leading-none tracking-wider">
           Cart
