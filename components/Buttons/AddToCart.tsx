@@ -36,7 +36,7 @@ const AddToCart: React.FC<Props> = ({ requestedData, text }) => {
       <button
         disabled={addingCart}
         onClick={handleAddToCart}
-        className="w-full fixed bottom-0 left-0 lg:relative flex items-center gap-2 justify-center font-light py-3.5 bg-templateBrown text-white text-sm"
+        className="w-full fixed bottom-0 left-0 lg:relative flex items-center gap-2 justify-center font-light py-3 bg-templateBrown text-white text-sm"
       >
         {addingCart && <Loader2 size={14} className="animate-spin" />}
         {text && (

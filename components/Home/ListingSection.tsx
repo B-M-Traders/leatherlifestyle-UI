@@ -23,7 +23,7 @@ const ListingSection: React.FC<Props> = ({ data }) => {
           {data.subHeading}
         </p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 gap-y-5 lg:gap-y-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-5 lg:gap-y-6">
         {data?.listing?.map((item, index) => (
           <React.Fragment key={index}>
             <ListingCard item={item} />

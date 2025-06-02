@@ -7,7 +7,7 @@ const BannerSlider = () => {
       <div className="h-full w-full hidden lg:block">
         <Image
           src={
-            "https://lureurban.b-cdn.net/cache/catalog/slides/lure-collection-2024-1920x900.jpg"
+            "https://www.thejacketmaker.com/cdn/shop/files/2048_x_1024_-_TJM.webp?v=1695726287"
           }
           alt={" Banner"}
           quality={100}
@@ -28,7 +28,6 @@ const BannerSlider = () => {
           width={3}
         />
       </div>
-      <div className="hidden lg:block absolute inset-0 bg-black/25" />
     </div>
   );
 };

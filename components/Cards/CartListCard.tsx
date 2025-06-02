@@ -76,12 +76,6 @@ const CartListCard: React.FC<Props> = ({ item }) => {
           </div>
         </div>
       </div>
-
-      {/* {updating && (
-    <div className="flex items-center justify-center border-b absolute inset-0 bg-white/50 ">
-      <Loader2 className="animate-spin" strokeWidth={1.5} />
-    </div>
-  )} */}
     </div>
   );
 };

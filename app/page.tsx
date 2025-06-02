@@ -75,16 +75,26 @@ export default function Home() {
       <IconWithText data={uspData} />
       <ShopByCategory />
       <ShopByCollection />
-      <Image
+      {/* <Image
         src={
-          "https://lureurban.b-cdn.net/cache/catalog/slides/lure-collection-2024-1920x900.jpg"
+          "https://www.thejacketmaker.com/cdn/shop/files/2048_x_1024_-_TJM.webp?v=1695726287"
         }
         alt=""
         height={600}
         width={1600}
         sizes="100vw"
-        className="h-[300px] lg:h-[400px] object-cover object-top w-full"
-      />
+        className="h-[250px] lg:h-[600px] object-cover object-center w-full"
+      /> */}
+      <div className="h-[300px] md:h-[400px] lg:h-[600px] w-full">
+        <video
+          muted
+          loop
+          autoPlay
+          controls={false}
+          className="h-full w-full object-cover"
+          src="https://www.thejacketmaker.com/cdn/shop/videos/c/vp/b6b8ed414b754c10baf95cf8466c9d89/b6b8ed414b754c10baf95cf8466c9d89.HD-720p-4.5Mbps-48307499.mp4?v=0"
+        ></video>
+      </div>
       <TrendingProducts />
       <NewArrivals />
       <OnSale />

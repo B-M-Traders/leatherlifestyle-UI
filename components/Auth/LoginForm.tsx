@@ -5,6 +5,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useForm } from "antd/es/form/Form";
 import { LoaderCircle } from "lucide-react";
+import Image from "next/image";
 
 type FieldType = {
   password?: string;
