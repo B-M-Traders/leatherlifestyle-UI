@@ -1,10 +1,12 @@
-"use client";
-import { Loader2, LoaderCircle, Minus, Plus, Trash } from "lucide-react";
-import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import CartListCard from "../Cards/CartListCard";
 import { useFormat } from "@/hooks/useFormat";
+import { useCart } from "@/hooks/useCart";
+import { Loader2, LoaderCircle, X } from "lucide-react";
+import { useToggleStore } from "@/store/useToggleStore";
+import useCartStore from "@/store/useCartStore";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 interface CartListProps {
   cartData: {
@@ -18,6 +20,27 @@ interface CartListProps {
 
 const CartList: React.FC<CartListProps> = ({ cartData }) => {
   const { formatAmount } = useFormat();
+  const { updatingCart, toggleCartDrawer } = useToggleStore();
+  const { cartItems } = useCartStore();
+  const { clearCart, totalPrice } = useCart();
+  const token = Cookies.get(process.env.AU_AUTH!);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    setLoading(true);
+    setTimeout(() => {
+      if (token) {
+        router.push("/checkout");
+        toggleCartDrawer();
+        setLoading(false);
+      } else {
+        router.push("/auth/login");
+        toggleCartDrawer();
+        setLoading(false);
+      }
+    }, 300);
+  };
   return (
     <div className="flex flex-col space-y-4 justify-between h-full w-full">
       {/* Cart Header */}
@@ -28,19 +51,29 @@ const CartList: React.FC<CartListProps> = ({ cartData }) => {
       <hr />
 
       {/* Cart Items */}
-      <div className="h-full relative overflow-y-auto w-full">
-        <div className="space-y-4">
+      <div className="h-full space-y-3 relative overflow-y-auto w-full">
+        {cartItems.length > 0 && (
+          <div className="flex items-center justify-end">
+            <button
+              onClick={clearCart}
+              className="text-xs flex items-center  gap-1 underline underline-offset-4 font-extralight"
+            >
+              Clear cart <X size={13} strokeWidth={1} />
+            </button>
+          </div>
+        )}
+        <div className="space-y-5">
           {cartData?.map((item, index: number) => (
             <React.Fragment key={index}>
               <CartListCard item={item as any} />
             </React.Fragment>
           ))}
         </div>
-        {/* {loading && (
-          <div className="absolute bg-white/40 inset-0 flex items-center justify-center">
+        {updatingCart && (
+          <div className="absolute bg-white/40 cursor-not-allowed inset-0 flex items-center justify-center">
             <Loader2 className="animate-spin" />
           </div>
-        )} */}
+        )}
       </div>
 
       <hr />
@@ -50,9 +83,12 @@ const CartList: React.FC<CartListProps> = ({ cartData }) => {
         {/* Subtotal */}
         <div className="flex items-center w-full justify-between">
           <h2 className="text-templateText">SUBTOTAL</h2>
-          <h2 className="text-templateText text-lg font-normal">
-            {formatAmount(100, "usd")}
-          </h2>
+          <div className="flex items-center justify-end gap-3">
+            {updatingCart && <Loader2 size={16} className="animate-spin" />}
+            <h2 className="text-templateText text-lg font-normal">
+              {formatAmount(totalPrice)}
+            </h2>
+          </div>
         </div>
 
         {/* Additional Info */}
@@ -62,12 +98,12 @@ const CartList: React.FC<CartListProps> = ({ cartData }) => {
 
         {/* Checkout Button */}
         <button
-          //   onClick={handleCheckout}
-          className="bg-templateBrown flex items-center justify-center gap-1 hover:opacity-90 tracking-wider text-white w-full py-2.5 rounded-full"
+          onClick={handleCheckout}
+          className="bg-templateBrown flex items-center justify-center font-light gap-2 hover:opacity-90 tracking-wider text-white w-full py-2.5 rounded-full"
         >
-          {/* {loading && (
-            <LoaderCircle size={20} className="animate-spin" strokeWidth={1} />
-          )} */}
+          {loading && (
+            <Loader2 size={16} className="animate-spin" strokeWidth={2} />
+          )}
           CHECKOUT
         </button>
       </div>

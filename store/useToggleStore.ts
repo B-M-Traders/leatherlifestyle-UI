@@ -3,6 +3,9 @@ import { create } from "zustand";
 type ToggleStore = {
   isCartDrawerOpen: boolean;
   isMenuDrawerOpen: boolean;
+  updatingCart: boolean;
+
+  setUpdatingCart: (value: boolean) => void;
 
   toggleCartDrawer: () => void;
   setCartDrawerOpen: (value: boolean) => void;
@@ -14,6 +17,9 @@ type ToggleStore = {
 export const useToggleStore = create<ToggleStore>((set) => ({
   isCartDrawerOpen: false,
   isMenuDrawerOpen: false,
+  updatingCart: false,
+
+  setUpdatingCart: (value) => set({ updatingCart: value }),
 
   toggleCartDrawer: () =>
     set((state) => ({ isCartDrawerOpen: !state.isCartDrawerOpen })),

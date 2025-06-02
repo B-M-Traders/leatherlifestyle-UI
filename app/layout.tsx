@@ -5,6 +5,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import BottomTabs from "@/components/layout/BottomTabs/BottomTabs";
 import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/layout/HeaderFooter/Footer";
+import { Toaster } from "react-hot-toast";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -53,6 +54,7 @@ export default function RootLayout({
       <body
         className={`${BricolageGrotesque.className} antialiased pb-[55px] lg:pb-0`}
       >
+        <Toaster />
         {/* <ThemeProvider
           attribute="class"
           defaultTheme="system"

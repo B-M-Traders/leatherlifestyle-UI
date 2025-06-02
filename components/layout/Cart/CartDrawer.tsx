@@ -13,10 +13,23 @@ const CartDrawer: React.FC<Props> = () => {
   const { isCartDrawerOpen } = useToggleStore();
   const [showDrawer, setShowDrawer] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
+  const { totalItems } = useCart();
 
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
+
+  useEffect(() => {
+    if (showDrawer) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showDrawer]);
 
   useEffect(() => {
     if (mounted) {
@@ -33,9 +46,11 @@ const CartDrawer: React.FC<Props> = () => {
         onClick={toggleDrawer}
         className="hover:bg-gray-100 relative rounded-full p-2 cursor-pointer "
       >
-        <span className="bg-templateBrown h-5 w-5 text-[11px] text-white rounded-full  absolute -top-0.5 -right-0.5 flex items-center justify-center">
-          3
-        </span>
+        {totalItems > 0 && (
+          <span className="bg-templateBrown h-5 w-5 text-[11px] text-white rounded-full  absolute -top-0.5 -right-0.5 flex items-center justify-center">
+            {totalItems}
+          </span>
+        )}
         <ShoppingBag size={18} strokeWidth={1.5} />
       </div>
 

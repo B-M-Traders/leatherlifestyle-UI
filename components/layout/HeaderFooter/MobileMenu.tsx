@@ -11,6 +11,18 @@ const MobileMenu = () => {
   const [menuStack, setMenuStack] = useState<any[]>([]);
   const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    if (toggleDrawer) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [toggleDrawer]);
+
   const currentMenu =
     menuStack.length === 0 ? menuItems : menuStack[menuStack.length - 1];
 

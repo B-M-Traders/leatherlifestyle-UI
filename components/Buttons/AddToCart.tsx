@@ -1,13 +1,25 @@
 "use client";
 import React from "react";
 import { useCart } from "@/hooks/useCart";
-import { LoaderIcon } from "lucide-react";
+import { Loader2, ShoppingCart } from "lucide-react";
 
-const AddToCart = () => {
+interface Props {
+  requestedData?: {
+    item_image: string;
+    item_name: string;
+    item_price: number;
+    item_id: number;
+    item_quantity: number;
+    variant_name: string | null;
+  };
+  text: string;
+}
+
+const AddToCart: React.FC<Props> = ({ requestedData, text }) => {
   const { addItem, addingCart } = useCart();
 
-  const requestedData = {
-    item_image: "",
+  const demoRequestedData = {
+    item_image: "/men1.jpg",
     item_name: "Product Name",
     item_price: 1500,
     item_id: 151,
@@ -16,18 +28,22 @@ const AddToCart = () => {
   };
 
   const handleAddToCart = () => {
-    addItem(requestedData);
+    addItem(requestedData || demoRequestedData);
   };
 
   return (
-    <div>
+    <div className="!m-0">
       <button
         disabled={addingCart}
         onClick={handleAddToCart}
-        className="w-full flex items-center gap-2 justify-center py-3.5 bg-templateBrown hover:bg-templateBrown/90 text-white text-sm"
+        className="w-full fixed bottom-0 left-0 lg:relative flex items-center gap-2 justify-center font-light py-3.5 bg-templateBrown text-white text-sm"
       >
-        {addingCart && <LoaderIcon size={14} className="animate-spin" />}
-        ADD TO CART
+        {addingCart && <Loader2 size={14} className="animate-spin" />}
+        {text && (
+          <>
+            {text} <ShoppingCart size={16} strokeWidth={2} />
+          </>
+        )}
       </button>
     </div>
   );

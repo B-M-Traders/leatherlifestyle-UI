@@ -1,13 +1,14 @@
 "use client";
 import { StarIcon } from "@/custom_icons/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FallbackImage from "./FallbackImage";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
 import { useFormat } from "@/hooks/useFormat";
+import AddToCart from "../Buttons/AddToCart";
 
 interface Props {
   item: {
+    id: number;
     image: string[];
     tag: string;
     name: string;
@@ -19,13 +20,34 @@ interface Props {
 const MainProductCard: React.FC<Props> = ({ item }) => {
   const { formatAmount } = useFormat();
   const [hovered, setHovered] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  const requestedData = {
+    item_image: item.image[0],
+    item_name: item.name,
+    item_price: item.price,
+    item_id: item.id,
+    item_quantity: 1,
+    variant_name: null,
+  };
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return (
     <div className="space-y-2">
       <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="overflow-hidden relative aspect-[4/5.5]"
+        onMouseEnter={() => isDesktop && setHovered(true)}
+        onMouseLeave={() => isDesktop && setHovered(false)}
+        className="overflow-hidden  relative aspect-[4/5.5]"
       >
         <Link href={"/product/product_slug"} className="block h-full w-full">
           {/* Primary Image */}
@@ -35,11 +57,13 @@ const MainProductCard: React.FC<Props> = ({ item }) => {
             height={800}
             width={400}
             className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${
-              hovered && item.image.length > 1 ? "opacity-0" : "opacity-100"
+              isDesktop && hovered && item.image.length > 1
+                ? "opacity-0"
+                : "opacity-100"
             }`}
           />
-          {/* Hover Image (only if second image exists) */}
-          {item.image.length > 1 && (
+
+          {item.image.length > 1 && isDesktop && (
             <FallbackImage
               src={item.image[1]}
               alt="Hover Image"
@@ -62,15 +86,17 @@ const MainProductCard: React.FC<Props> = ({ item }) => {
         )}
 
         {/* Add to Bag Button */}
-        <div
-          className={`p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${
-            hovered ? "translate-y-0 opacity-100" : "opacity-0 translate-y-full"
-          }`}
-        >
-          <p className="bg-white hover:bg-templateBrown hover:text-white transition-all ease-in-out duration-300 cursor-pointer uppercase p-2 flex items-center font-medium justify-center gap-2 w-full text-[13px] text-center">
-            Add to bag <ShoppingCart size={16} strokeWidth={2} />
-          </p>
-        </div>
+        {isDesktop && (
+          <div
+            className={`hidden lg:block p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${
+              hovered
+                ? "translate-y-0 opacity-100"
+                : "opacity-0 translate-y-full"
+            }`}
+          >
+            <AddToCart requestedData={requestedData} text="Add to bag" />
+          </div>
+        )}
       </div>
 
       {/* Product Details */}

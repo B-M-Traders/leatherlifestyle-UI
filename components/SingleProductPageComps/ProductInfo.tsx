@@ -89,7 +89,7 @@ const ProductInfo = () => {
             ))}
           </div>
         </div>
-        <AddToCart />
+        <AddToCart text="Buy now" />
         <DetailsAccordion />
       </div>
 
