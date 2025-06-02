@@ -72,10 +72,10 @@ export default function Home() {
   return (
     <div>
       <BannerSlider />
-      {/* <IconWithText data={uspData} /> */}
-      {/* <ShopByCategory /> */}
-      {/* <ShopByCollection /> */}
-      {/* <Image
+      <IconWithText data={uspData} />
+      <ShopByCategory />
+      <ShopByCollection />
+      <Image
         src={
           "https://lureurban.b-cdn.net/cache/catalog/slides/lure-collection-2024-1920x900.jpg"
         }
@@ -84,7 +84,7 @@ export default function Home() {
         width={1600}
         sizes="100vw"
         className="h-[300px] lg:h-[400px] object-cover object-top w-full"
-      /> */}
+      />
       <TrendingProducts />
       <NewArrivals />
       <OnSale />
