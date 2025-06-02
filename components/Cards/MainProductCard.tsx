@@ -5,11 +5,12 @@ import FallbackImage from "./FallbackImage";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { useFormat } from "@/hooks/useFormat";
+import { StoreProduct } from "@medusajs/types";
 
-const MainProductCard = () => {
+const MainProductCard = ({ product }: { product: StoreProduct }) => {
   const { formatAmount } = useFormat();
-  const images = ["/product.jpg", "/product2.jpg"];
   const [hovered, setHovered] = useState(false);
+  console.log(product)
 
   return (
     <div className=" space-y-2">
@@ -18,24 +19,22 @@ const MainProductCard = () => {
         onMouseLeave={() => setHovered(false)}
         className="overflow-hidden relative aspect-[4/5.5]"
       >
-        <Link href={"/product/product_slug"} className="block h-full w-full">
+        <Link href={`product/${product.handle}`} className="block h-full w-full">
           <FallbackImage
-            src={images[0]}
+            src={product.thumbnail}
             alt="Primary Image"
             height={800}
             width={400}
-            className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${
-              hovered ? "opacity-0" : "opacity-100"
-            }`}
+            className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${hovered ? "opacity-0" : "opacity-100"
+              }`}
           />
           <FallbackImage
-            src={images[1]}
+            src={product.images && product.images[1].url}
             alt="Hover Image"
             height={800}
             width={400}
-            className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${
-              hovered ? "opacity-100" : "opacity-0"
-            }`}
+            className={`h-full w-full object-cover object-center absolute inset-0 transition-opacity duration-500 ${hovered ? "opacity-100" : "opacity-0"
+              }`}
           />
         </Link>
         <div className="p-2 absolute top-0  left-0">
@@ -45,9 +44,8 @@ const MainProductCard = () => {
         </div>
 
         <div
-          className={`p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${
-            hovered ? "translate-y-0 opacity-100" : "opacity-0 translate-y-full"
-          }`}
+          className={`p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${hovered ? "translate-y-0 opacity-100" : "opacity-0 translate-y-full"
+            }`}
         >
           <p className="bg-white  hover:bg-templateBrown hover:text-white transition-all ease-in-out duration-300 cursor-pointer uppercase p-2 flex items-center font-medium justify-center gap-2 w-full text-[13px] text-center">
             Add to bag <ShoppingCart size={16} strokeWidth={2} />
@@ -55,7 +53,7 @@ const MainProductCard = () => {
         </div>
       </div>
 
-      <Link href={"/product/product_slug"} className="block space-y-1">
+      <Link href={`product/${product.handle}`} className="block space-y-1">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
             {Array(3)
@@ -69,7 +67,7 @@ const MainProductCard = () => {
           </span>
         </div>
         <h2 className="text-[14px] leading-snug lg:text-[15px] font-medium text-templateBrown">
-          Azura Classic Leather Jacket
+          {product.title}
         </h2>
         <span className="block font-medium lg:text-lg">
           {formatAmount(150)}

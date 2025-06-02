@@ -10,7 +10,7 @@ import Testimonials from "@/components/Home/Testimonials";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
   const uspData = [
     {
       name: "Premium Leather",
@@ -69,6 +69,7 @@ export default function Home() {
     "/product.jpg",
     "/product2.jpg",
   ];
+
   return (
     <div>
       <BannerSlider />
