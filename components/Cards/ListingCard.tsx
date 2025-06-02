@@ -7,7 +7,7 @@ interface Props {
   item: {
     url: string;
     image: string[];
-    text: string;
+    name: string;
   };
 }
 
@@ -23,7 +23,7 @@ const ListingCard: React.FC<Props> = ({ item }) => {
           className="h-full w-full object-cover group-hover:scale-105 group-hover:rotate-2 transition-all ease-in-out duration-300"
         />
       </div>
-      <h2 className="text-[16px] text-center font-light ">{item.text}</h2>
+      <h2 className="text-[16px] text-center font-light ">{item.name}</h2>
     </Link>
   );
 };
