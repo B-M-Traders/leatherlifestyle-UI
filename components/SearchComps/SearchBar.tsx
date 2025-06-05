@@ -33,7 +33,7 @@ const SearchBar = () => {
   const debouncedSearch = useDebouncedCallback((term: string) => {
     if (term.trim()) {
       const filtered = featuredProducts.filter((product) =>
-        product.text.toLowerCase().includes(term.toLowerCase())
+        product.name.toLowerCase().includes(term.toLowerCase())
       );
       setSearchResults(filtered);
     } else {
@@ -108,7 +108,7 @@ const SearchBar = () => {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {searchResults.map((product, index) => (
                   <div onClick={handleSearchToggle} key={index}>
-                    <BasicProductCard item={product} />
+                    <BasicProductCard item={product as any} />
                   </div>
                 ))}
               </div>

@@ -1,6 +1,8 @@
+import ReviewList from "@/components/ReviewsComp/ReviewList";
 import ExtraDetail from "@/components/SingleProductPageComps/ExtraDetail";
 import ImageGallery from "@/components/SingleProductPageComps/ImageGallery";
 import ProductInfo from "@/components/SingleProductPageComps/ProductInfo";
+import RelatedProducts from "@/components/SingleProductPageComps/RelatedProducts";
 import { ChevronRight } from "lucide-react";
 import React from "react";
 
@@ -24,6 +26,12 @@ const Productdetailpage = () => {
       </div>
       <div className="!mt-20">
         <ExtraDetail />
+      </div>
+      <div>
+        <ReviewList />
+      </div>
+      <div>
+        <RelatedProducts />
       </div>
     </div>
   );

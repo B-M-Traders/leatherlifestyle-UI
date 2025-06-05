@@ -11,11 +11,15 @@ import {
   ShoppingBag,
   User,
 } from "lucide-react";
-import { getTargetTriple } from "next/dist/build/swc/generated-native";
 import { useToggleStore } from "@/store/useToggleStore";
+import { useCart } from "@/hooks/useCart";
 
 const BottomTabs = () => {
+  const pathname = usePathname();
   const { toggleCartDrawer, toggleMenuDrawer } = useToggleStore();
+  const { totalItems } = useCart();
+
+  if (pathname.includes("/product")) return null;
   return (
     <div className="lg:hidden select-none h-[65px] bg-white dark:bg-black border-t rounded-t-2xl grid grid-cols-5 fixed w-full bottom-0  left-0 my-auto bg-templateBackground text-templateText">
       <Link
@@ -49,6 +53,11 @@ const BottomTabs = () => {
         onClick={toggleCartDrawer}
         className="active:bg-gray-100 relative grid gap-1 place-content-center place-items-center"
       >
+        {totalItems > 0 && (
+          <span className="bg-templateBrown h-5 w-5 text-[11px] text-white rounded-full  absolute top-2 right-4 md:top-2 md:right-12 flex items-center justify-center">
+            {totalItems}
+          </span>
+        )}
         <ShoppingBag size={18} strokeWidth={1.5} />
         <span className="text-[11px] font-light leading-none tracking-wider">
           Cart

@@ -2,6 +2,7 @@ import Breadcrumb from "@/components/BasicComps/Breadcrumb ";
 import FilterAndSort from "@/components/collection_category/FilterAndSort";
 import ProductContainer from "@/components/collection_category/ProductContainer";
 import { sdk } from "@/lib/sdk";
+import useCustomerStore from "@/store/useCustomerStore";
 import React from "react";
 
 interface PageProps {

@@ -1,6 +1,7 @@
 import React from "react";
-import MainProductCard from "../Cards/MainProductCard";
 import { StoreProduct } from "@medusajs/types";
+import { featuredProducts } from "@/lib/Menudata";
+import MainProductCard from "../Cards/MainProductCard";
 
 const ProductContainer = ({ products }: { products: StoreProduct[] | undefined }) => {
   if (!products) return null
@@ -9,6 +10,7 @@ const ProductContainer = ({ products }: { products: StoreProduct[] | undefined }
       {products.map((product) =>
         <MainProductCard key={product.id} product={product} />
       )}
+    
     </div>
   );
 };

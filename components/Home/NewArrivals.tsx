@@ -1,6 +1,7 @@
 import { featuredProducts } from "@/lib/Menudata";
 import React from "react";
 import ListingSection from "./ListingSection";
+import ProductSection from "./ProductSection";
 
 const NewArrivals = () => {
   const listingData = {
@@ -13,7 +14,7 @@ const NewArrivals = () => {
   };
   return (
     <div>
-      <ListingSection data={listingData} />
+      <ProductSection data={listingData} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import ListingCard from "../Cards/ListingCard";
-import { sdk } from "@/lib/sdk";
+import MainProductCard from "../Cards/MainProductCard";
 
 interface Props {
   data: {
@@ -13,12 +13,7 @@ interface Props {
   };
 }
 
-const ListingSection: React.FC<Props> = async ({ data }) => {
-
-  const { product_categories } = await sdk.store.category.list({
-    parent_category_id: "null",
-    limit: 6
-  })
+const ProductSection: React.FC<Props> = ({ data }) => {
   return (
     <div className="templateContainer space-y-8 py-6 md:py-10 lg:py-14">
       <div className="space-y-0.5">
@@ -32,7 +27,7 @@ const ListingSection: React.FC<Props> = async ({ data }) => {
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-5 lg:gap-y-6">
         {data?.listing?.map((item, index) => (
           <React.Fragment key={index}>
-            <ListingCard item={item} />
+            <MainProductCard item={item} />
           </React.Fragment>
         ))}
       </div>
@@ -54,4 +49,4 @@ const ListingSection: React.FC<Props> = async ({ data }) => {
   );
 };
 
-export default ListingSection;
+export default ProductSection;

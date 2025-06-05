@@ -1,23 +1,60 @@
 "use client";
 import { StarIcon } from "@/custom_icons/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FallbackImage from "./FallbackImage";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
 import { useFormat } from "@/hooks/useFormat";
 import { StoreProduct } from "@medusajs/types";
+import { ShoppingCart } from "lucide-react";
+import AddToCart from "../Buttons/AddToCart";
 
 const MainProductCard = ({ product }: { product: StoreProduct }) => {
   const { formatAmount } = useFormat();
   const [hovered, setHovered] = useState(false);
   console.log(product)
 
+interface Props {
+  item: {
+    id: number;
+    image: string[];
+    tag: string;
+    name: string;
+    price: number;
+    star: number;
+  };
+}
+
+const MainProductCard: React.FC<Props> = ({ item }) => {
+  const { formatAmount } = useFormat();
+  const [hovered, setHovered] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  const requestedData = {
+    item_image: item.image[0],
+    item_name: item.name,
+    item_price: item.price,
+    item_id: item.id,
+    item_quantity: 1,
+    variant_name: null,
+  };
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
-    <div className=" space-y-2">
+    <div className="space-y-2">
       <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="overflow-hidden relative aspect-[4/5.5]"
+        onMouseEnter={() => isDesktop && setHovered(true)}
+        onMouseLeave={() => isDesktop && setHovered(false)}
+        className="overflow-hidden  relative aspect-[4/5.5]"
       >
         <Link href={`product/${product.handle}`} className="block h-full w-full">
           <FallbackImage
@@ -43,21 +80,28 @@ const MainProductCard = ({ product }: { product: StoreProduct }) => {
           </div>
         </div>
 
-        <div
-          className={`p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${hovered ? "translate-y-0 opacity-100" : "opacity-0 translate-y-full"
+        {/* Add to Bag Button */}
+        {isDesktop && (
+          <div
+            className={`hidden lg:block p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${
+              hovered
+                ? "translate-y-0 opacity-100"
+                : "opacity-0 translate-y-full"
             }`}
-        >
-          <p className="bg-white  hover:bg-templateBrown hover:text-white transition-all ease-in-out duration-300 cursor-pointer uppercase p-2 flex items-center font-medium justify-center gap-2 w-full text-[13px] text-center">
-            Add to bag <ShoppingCart size={16} strokeWidth={2} />
-          </p>
-        </div>
+          >
+            <AddToCart requestedData={requestedData} text="Add to bag" />
+          </div>
+        )}
       </div>
 
-      <Link href={`product/${product.handle}`} className="block space-y-1">
+      
+
+      {/* Product Details */}
+      <Link href={"/product/product_slug"} className="block space-y-1">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
-            {Array(3)
-              .fill(3)
+            {Array(item.star)
+              .fill(item.star)
               .map((_, index) => (
                 <StarIcon key={index} />
               ))}
@@ -68,9 +112,10 @@ const MainProductCard = ({ product }: { product: StoreProduct }) => {
         </div>
         <h2 className="text-[14px] leading-snug lg:text-[15px] font-medium text-templateBrown">
           {product.title}
+        
         </h2>
-        <span className="block font-medium lg:text-lg">
-          {formatAmount(150)}
+        <span className="block font-light tracking-wide">
+          {formatAmount(item.price)}
         </span>
       </Link>
     </div>

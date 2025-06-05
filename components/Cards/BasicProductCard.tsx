@@ -6,7 +6,7 @@ import FallbackImage from "./FallbackImage";
 interface Props {
   item: {
     url: string;
-    image: string;
+    image: string[];
     text: string;
   };
 }
@@ -18,7 +18,7 @@ const BasicProductCard: React.FC<Props> = ({ item }) => {
         <div className="aspect-[4/5] overflow-hidden">
           <FallbackImage
             className=" bg-gray-50 group-hover:scale-105 group-hover:rotate-2 transition-all ease-in-out duration-300 h-full w-full object-cover"
-            src={item.image}
+            src={item.image[0]}
             alt="Product Image"
             height={600}
             width={400}

@@ -6,6 +6,7 @@ import { StoreProductCategory } from "@medusajs/types";
 
 interface Props {
   item: StoreProductCategory;
+  
 }
 
 const ListingCard: React.FC<Props> = ({ item }) => {
