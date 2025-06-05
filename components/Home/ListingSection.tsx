@@ -15,10 +15,7 @@ interface Props {
 
 const ListingSection: React.FC<Props> = async ({ data }) => {
 
-  const { product_categories } = await sdk.store.category.list({
-    parent_category_id: "null",
-    limit: 6
-  })
+  
   return (
     <div className="templateContainer space-y-8 py-6 md:py-10 lg:py-14">
       <div className="space-y-0.5">

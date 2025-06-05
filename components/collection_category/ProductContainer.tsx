@@ -10,7 +10,6 @@ const ProductContainer = ({ products }: { products: StoreProduct[] | undefined }
       {products.map((product) =>
         <MainProductCard key={product.id} product={product} />
       )}
-    
     </div>
   );
 };
