@@ -12,7 +12,7 @@ interface Props {
 const IconWithText: React.FC<Props> = ({ data }) => {
   return (
     <>
-      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 gap-y-6 lg:gap-5 px-5 py-8 lg:py-10">
+      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 gap-y-6 lg:gap-5 px-5 md:px-10 py-8 lg:py-10">
         {data.map((usp) => (
           <div
             key={usp.name}
