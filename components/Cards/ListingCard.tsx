@@ -2,21 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import FallbackImage from "./FallbackImage";
+import { StoreProductCategory } from "@medusajs/types";
 
 interface Props {
-  item: {
-    url: string;
-    image: string[];
-    name: string;
-  };
+  item: StoreProductCategory;
+  
 }
 
 const ListingCard: React.FC<Props> = ({ item }) => {
   return (
-    <Link href={item.url} className="block group space-y-2">
+    <Link href={`category/${item.handle}`} className="block group space-y-2">
       <div className="aspect-[4/5.5] overflow-hidden">
         <FallbackImage
-          src={item.image[0]}
+          src={item.description}
           alt="Category Image"
           height={600}
           width={400}

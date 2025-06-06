@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import ListingCard from "../Cards/ListingCard";
+import { sdk } from "@/lib/sdk";
 
 interface Props {
   data: {
@@ -12,7 +13,9 @@ interface Props {
   };
 }
 
-const ListingSection: React.FC<Props> = ({ data }) => {
+const ListingSection: React.FC<Props> = async ({ data }) => {
+
+  
   return (
     <div className="templateContainer space-y-8 py-6 md:py-10 lg:py-14">
       <div className="space-y-0.5">
