@@ -86,7 +86,7 @@ const MainProductCard: React.FC<Props> = ({ item }) => {
         )}
 
         {/* Add to Bag Button */}
-        {isDesktop && (
+        {/* {isDesktop && (
           <div
             className={`hidden lg:block p-2 absolute bottom-0 w-full transition-all duration-300 left-0 ${
               hovered
@@ -96,7 +96,7 @@ const MainProductCard: React.FC<Props> = ({ item }) => {
           >
             <AddToCart requestedData={requestedData} text="Add to bag" />
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Product Details */}

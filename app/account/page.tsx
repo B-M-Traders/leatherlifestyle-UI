@@ -1,7 +1,7 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
 const Account = () => {
-  return <div>Account</div>;
+  redirect("/account/profile");
 };
 
 export default Account;
