@@ -25,3 +25,52 @@ export const reviews = [
     review: "Incredible craftsmanship. You can tell it's made to last.",
   },
 ];
+
+export const productDetail = {
+  product_id: 151,
+  product_name: "Green Matte Color Leather Jacket for Men",
+  product_images: ["/p1.jpg", "/p2.jpg", "/p3.jpg", "/p4.jpg", "/p5.jpg"],
+  product_price: 150,
+  isStock: true,
+  review: {
+    star: 4,
+    count: 150,
+    reviews: [],
+  },
+
+  variation: [
+    {
+      name: "Color",
+      options: [
+        { label: "Black", value: "#242424" },
+        { label: "Brown", value: "#52362F" },
+        { label: "Tan", value: "#8A5A36" },
+      ],
+    },
+    {
+      name: "Size",
+      options: [
+        {
+          label: "XS (US 34)",
+          value: "xs",
+        },
+        {
+          label: "S (US 36)",
+          value: "s",
+        },
+        {
+          label: "M (US 38)",
+          value: "m",
+        },
+        {
+          label: "L (US 40)",
+          value: "l",
+        },
+        {
+          label: "Custom Size",
+          value: "custom",
+        },
+      ],
+    },
+  ],
+};

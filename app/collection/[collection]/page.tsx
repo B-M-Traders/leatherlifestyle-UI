@@ -4,21 +4,20 @@ import ProductContainer from "@/components/collection_category/ProductContainer"
 import React from "react";
 
 interface PageProps {
-  params: Promise<{ collection: string[] }>;
+  params: Promise<{ collection: string }>;
 }
 
-const getProducts = async (collection: string[]) => {};
+const getProducts = async (collection: string) => {};
 
 const Collection: React.FC<PageProps> = async ({ params }) => {
-  const CollectionSegments = (await params).collection;
-  // const data = await getProducts(categorySegments);
-  const lastCollection = CollectionSegments[CollectionSegments.length - 1];
+  const collection = (await params).collection;
+  // const data = await getProducts(collection);
 
   return (
     <div className="templateContainer pb-12">
       <Breadcrumb
-        heading={lastCollection.replace(/-/g, " ")}
-        breadCrumb={["Home", "Collection", ...CollectionSegments]}
+        heading={collection.replace(/-/g, " ")}
+        breadCrumb={["Home", "Collection", collection]}
       />
 
       <div className="space-y-4">

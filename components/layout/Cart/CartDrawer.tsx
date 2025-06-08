@@ -4,6 +4,7 @@ import { useCart } from "@/hooks/useCart";
 import useCartStore from "@/store/useCartStore";
 import { useToggleStore } from "@/store/useToggleStore";
 import { ShoppingBag } from "lucide-react";
+import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 
 interface Props {}
@@ -14,10 +15,15 @@ const CartDrawer: React.FC<Props> = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
   const { totalItems } = useCart();
+  const pathname = usePathname();
 
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
+
+  useEffect(() => {
+    setShowDrawer(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (showDrawer) {
@@ -56,17 +62,26 @@ const CartDrawer: React.FC<Props> = () => {
 
       <div
         onClick={toggleDrawer}
-        className="bg-black/50 fixed top-0 bottom-0 left-0 right-0 z-20 transition-transform duration-300 "
+        className="bg-black/30 backdrop-blur-sm fixed top-0 bottom-0 left-0 right-0 z-50 transition-transform duration-300 "
         style={{ display: showDrawer ? "block" : "none" }}
       ></div>
 
       <div
-        className={`fixed top-0 bottom-0 text-black right-0 w-[85%] md:w-[400px] bg-white shadow-lg z-30 p-6 ${
+        className={`fixed top-0 bottom-0  text-black right-0 w-[85%] md:w-[425px] bg-white shadow-xl border z-50 p-6 ${
           showDrawer ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
-        <CartList cartData={cartItems as any} />
-        {/* <EmptyCart /> */}
+        {cartItems.length === 0 ? (
+          <div className="space-y-4">
+            <div className="space-y-4">
+              <h2 className="text-templateBrown font-normal">Your Cart</h2>
+              <hr />
+            </div>
+            <EmptyCart />
+          </div>
+        ) : (
+          <CartList cartData={cartItems as any} />
+        )}
       </div>
     </>
   );

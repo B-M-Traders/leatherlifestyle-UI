@@ -18,17 +18,24 @@ interface Props {
 const AddToCart: React.FC<Props> = ({ requestedData, text }) => {
   const { addItem, addingCart } = useCart();
 
-  const demoRequestedData = {
-    item_image: "/men1.jpg",
-    item_name: "Product Name",
-    item_price: 1500,
-    item_id: 151,
-    item_quantity: 1,
-    variant_name: "White, XXL",
+  const checkVariantSelected = () => {
+    if (!requestedData?.variant_name) return false;
+
+    const parts = requestedData.variant_name
+      .split(",")
+      .map((p) => p.trim().toLowerCase());
+
+    // Make sure no part is 'null', empty, or whitespace
+    return parts.length === 2 && parts.every((p) => p && p !== "null");
   };
 
   const handleAddToCart = () => {
-    addItem(requestedData || demoRequestedData);
+    if (!checkVariantSelected()) {
+      alert("Please select both color and size before adding to cart.");
+      return;
+    }
+
+    addItem(requestedData);
   };
 
   return (

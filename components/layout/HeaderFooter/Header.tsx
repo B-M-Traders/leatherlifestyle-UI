@@ -136,7 +136,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border absolute top-full left-0 w-full bg-white z-50"
+            className="overflow-hidden border absolute top-full left-0 w-full bg-white z-40"
             onMouseEnter={() => setToggle(true)}
             onMouseLeave={() => {
               setToggle(false);

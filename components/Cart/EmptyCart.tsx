@@ -5,10 +5,6 @@ import React from "react";
 const EmptyCart = () => {
   return (
     <div className="space-y-4">
-      <div className="space-y-4">
-        <h2 className="text-templateBrown font-normal">Your Cart</h2>
-        <hr />
-      </div>
       {/* ---------- */}
       <div className="w-full h-full p-5 space-y-4">
         <div className="flex items-center justify-center">
@@ -25,7 +21,7 @@ const EmptyCart = () => {
             There is nothing in your bag. Let's add some items.
           </p>
         </div>
-        <Link href={"/shop"} className="block text-center">
+        <Link href={"/"} className="block text-center">
           <button className="border uppercase border-templatePrimary tracking-wide text-templatePrimary py-2 px-6 text-xs font-medium">
             Let's Shop
           </button>

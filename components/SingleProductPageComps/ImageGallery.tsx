@@ -5,11 +5,15 @@ import { EmblaOptionsType } from "embla-carousel";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+interface Props {
+  data: {
+    product_images: string[];
+  };
+}
+
 const OPTIONS: EmblaOptionsType = { loop: true };
 
-const slides = ["/p5.jpg", "/p2.jpg", "/p3.jpg", "/p4.jpg", "/p1.jpg"];
-
-const EmblaCarousel: React.FC = () => {
+const EmblaCarousel: React.FC<Props> = ({ data }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(OPTIONS);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
@@ -47,7 +51,7 @@ const EmblaCarousel: React.FC = () => {
       <div className="">
         <div className="overflow-x-scroll" ref={emblaThumbsRef}>
           <div className="flex  lg:flex-col w-max gap-2">
-            {slides.map((item, index) => (
+            {data.product_images.map((item, index) => (
               <button
                 key={index}
                 onClick={() => onThumbClick(index)}
@@ -74,10 +78,10 @@ const EmblaCarousel: React.FC = () => {
       <div className="w-full relative">
         <div className="overflow-hidden" ref={emblaMainRef}>
           <div className="flex">
-            {slides.map((item, index) => (
+            {data.product_images.map((item, index) => (
               <div
                 key={index}
-                className="flex-[0_0_100%]  flex justify-center items-center  border"
+                className="flex-[0_0_100%]  flex justify-center items-center border"
               >
                 <Image
                   src={item}

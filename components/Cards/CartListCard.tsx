@@ -9,6 +9,7 @@ interface Props {
     item_name: string;
     item_quantity: number;
     item_price: number;
+    variant_name: string;
     item_image: string;
   };
 }
@@ -19,7 +20,7 @@ const CartListCard: React.FC<Props> = ({ item }) => {
   return (
     <div className="flex gap-2 group">
       {/* Product Image */}
-      <div className="h-[70px] w-[65px] overflow-hidden">
+      <div className="h-full w-[70px] overflow-hidden">
         <FallbackImage
           src={item.item_image}
           alt={"product image"}
@@ -38,9 +39,12 @@ const CartListCard: React.FC<Props> = ({ item }) => {
         >
           Remove
         </button>
-        <h2 className="tracking-wide font-light text-[12px] leading-tight text-templateBrown">
+        <h2 className="font-light text-[13px] leading-tight text-templateBrown">
           {item.item_name}
         </h2>
+        <p className="font-light text-[12px] leading-tight text-gray-500">
+          {item.variant_name}
+        </p>
         <div className="flex items-center justify-between">
           <div className="flex items-center border w-auto  px-2 py-0.5 bg-white">
             <div

@@ -7,6 +7,7 @@ import { useToggleStore } from "@/store/useToggleStore";
 import useCartStore from "@/store/useCartStore";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface CartListProps {
   cartData: {
@@ -27,20 +28,6 @@ const CartList: React.FC<CartListProps> = ({ cartData }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleCheckout = () => {
-    setLoading(true);
-    setTimeout(() => {
-      if (token) {
-        router.push("/checkout");
-        toggleCartDrawer();
-        setLoading(false);
-      } else {
-        router.push("/auth/login");
-        toggleCartDrawer();
-        setLoading(false);
-      }
-    }, 300);
-  };
   return (
     <div className="flex flex-col space-y-4 justify-between h-full w-full">
       {/* Cart Header */}
@@ -97,15 +84,15 @@ const CartList: React.FC<CartListProps> = ({ cartData }) => {
         </p>
 
         {/* Checkout Button */}
-        <button
-          onClick={handleCheckout}
+        <Link
+          href={"/cart"}
           className="bg-templateBrown flex items-center justify-center font-light gap-2 hover:opacity-90 tracking-wider text-white w-full py-2.5 rounded-full"
         >
           {loading && (
             <Loader2 size={16} className="animate-spin" strokeWidth={2} />
           )}
-          CHECKOUT
-        </button>
+          GO TO CART
+        </Link>
       </div>
     </div>
   );

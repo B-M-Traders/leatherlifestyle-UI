@@ -3,8 +3,8 @@ import ExtraDetail from "@/components/SingleProductPageComps/ExtraDetail";
 import ImageGallery from "@/components/SingleProductPageComps/ImageGallery";
 import ProductInfo from "@/components/SingleProductPageComps/ProductInfo";
 import RelatedProducts from "@/components/SingleProductPageComps/RelatedProducts";
+import { productDetail } from "@/lib/mockData";
 import { ChevronRight } from "lucide-react";
-import Image from "next/image";
 import React from "react";
 
 const Productdetailpage = () => {
@@ -16,14 +16,14 @@ const Productdetailpage = () => {
           <li>
             <ChevronRight size={18} strokeWidth={1} />
           </li>
-          <li>Product Name</li>
+          <li>{productDetail.product_name}</li>
         </ul>
         <div className=" w-full flex flex-col lg:flex-row items-start gap-5 md:gap-10">
           <div className="w-full lg:w-[63%]">
-            <ImageGallery />
+            <ImageGallery data={productDetail} />
           </div>
           <div className="w-full lg:w-[37%]">
-            <ProductInfo />
+            <ProductInfo data={productDetail} />
           </div>
         </div>
       </div>
