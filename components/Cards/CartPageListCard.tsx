@@ -3,7 +3,9 @@ import React from "react";
 import FallbackImage from "./FallbackImage";
 import { useFormat } from "@/hooks/useFormat";
 import { useCart } from "@/hooks/useCart";
-import CustomInput from "../ui/custom-input";
+import CustomSelect from "../ui/custom-select";
+import Cookies from "js-cookie";
+import Link from "next/link";
 
 interface Props {
   item: {
@@ -15,7 +17,8 @@ interface Props {
   };
 }
 
-const CartListCard: React.FC<Props> = ({ item }) => {
+const CartPageListCard: React.FC<Props> = ({ item }) => {
+  const authToken = Cookies.get(process.env.USER_AUTH_KEY!);
   const { formatAmount } = useFormat();
   const { updateQuantity, removeItem } = useCart();
   return (
@@ -47,7 +50,7 @@ const CartListCard: React.FC<Props> = ({ item }) => {
           {item.variant_name}
         </p>
         <div className="flex items-center justify-between">
-          <div className="flex items-center border w-auto  px-2 py-0.5 bg-white">
+          <div className="flex  items-center border w-auto  px-2 py-0.5 bg-white">
             <div
               onClick={() => updateQuantity(item, "decrement")}
               className="flex items-center cursor-pointer justify-center hover:text-templatePrimary"
@@ -73,6 +76,21 @@ const CartListCard: React.FC<Props> = ({ item }) => {
             </div>
           </div>
 
+          {item.variant_name.toLowerCase().includes("custom") && (
+            <>
+              {!authToken ? (
+                <CustomSelect list={["Arshad Ansari"]} />
+              ) : (
+                <Link
+                  href={"/auth/login"}
+                  className="inline-block underline underline-offset-4 text-xs font-light text-orange-500"
+                >
+                  Please login to add custom size
+                </Link>
+              )}
+            </>
+          )}
+
           {/* Product Prices */}
           <div className="">
             <h2 className="text-templateBrown text-sm">
@@ -85,4 +103,4 @@ const CartListCard: React.FC<Props> = ({ item }) => {
   );
 };
 
-export default CartListCard;
+export default CartPageListCard;
