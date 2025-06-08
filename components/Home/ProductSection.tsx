@@ -20,9 +20,11 @@ const ProductSection: React.FC<Props> = ({ data }) => {
         <h2 className="text-center text-[24px] lg:text-[30px] tracking-tight font-normal text-templateBrown">
           {data.heading}
         </h2>
-        <p className="max-w-xl mx-auto text-center text-[12px] lg:text-[14px] tracking-wide font-light text-gray-500">
-          {data.subHeading}
-        </p>
+        {data.subHeading && (
+          <p className="max-w-xl mx-auto text-center text-[12px] lg:text-[14px] tracking-wide font-light text-gray-500">
+            {data.subHeading}
+          </p>
+        )}
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-5 lg:gap-y-6">
         {data?.listing?.map((item, index) => (

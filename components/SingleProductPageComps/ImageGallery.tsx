@@ -45,7 +45,7 @@ const EmblaCarousel: React.FC = () => {
     <div className="flex flex-col-reverse lg:flex-row gap-4 max-w-5xl mx-auto">
       {/* Thumbnails */}
       <div className="">
-        <div className="overflow-x-auto" ref={emblaThumbsRef}>
+        <div className="overflow-x-scroll" ref={emblaThumbsRef}>
           <div className="flex  lg:flex-col w-max gap-2">
             {slides.map((item, index) => (
               <button
@@ -77,7 +77,7 @@ const EmblaCarousel: React.FC = () => {
             {slides.map((item, index) => (
               <div
                 key={index}
-                className="flex-[0_0_100%] aspect-[4/4.5] md:aspect-[4/4] lg:aspect-[4/4.5] flex justify-center items-center  border"
+                className="flex-[0_0_100%]  flex justify-center items-center  border"
               >
                 <Image
                   src={item}

@@ -26,7 +26,7 @@ const ProductInfo = () => {
   return (
     <>
       <div className="space-y-4 md:space-y-5">
-        <h1 className="font-light tracking-tight text-[20px] md:text-[26px] lg:text-[30px] leading-none text-[#242424]">
+        <h1 className=" tracking-tight text-[20px] md:text-[26px] lg:text-[30px] leading-none text-[#242424]">
           Black Leather Coat
         </h1>
         <div className="space-y-2">
@@ -38,11 +38,14 @@ const ProductInfo = () => {
                   <StarIcon key={index} />
                 ))}
             </div>
-            <span className="font-light text-[10px] lg:text-[12px] mt-1 lg:mt-0.5 text-templateBrown">
+            <a
+              href="#reviews"
+              className="font-light text-[10px] lg:text-[12px] mt-1 lg:mt-0.5 text-templateBrown"
+            >
               (150)
-            </span>
+            </a>
           </div>
-          <span className="inline-block text-lg lg:text-[25px] leading-none text-templateBrown font-medium">
+          <span className="inline-block text-lg lg:text-[25px] leading-none text-templateBrown font-light">
             {formatAmount(266)}
           </span>
         </div>
