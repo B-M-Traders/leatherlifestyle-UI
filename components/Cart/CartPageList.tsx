@@ -16,10 +16,10 @@ const CartPageList = () => {
         ) : (
           <div className="space-y-4">
             {cartItems.map((item, index) => (
-              <>
+              <React.Fragment key={index}>
                 <CartPageListCard item={item as any} />
                 <hr />
-              </>
+              </React.Fragment>
             ))}
           </div>
         )}

@@ -49,8 +49,9 @@ const CartPageListCard: React.FC<Props> = ({ item }) => {
         <p className="font-light text-[12px] leading-tight text-gray-500">
           {item.variant_name}
         </p>
+
         <div className="flex items-center justify-between">
-          <div className="flex  items-center border w-auto  px-2 py-0.5 bg-white">
+          <div className="flex  items-center border   px-2 py-0.5 bg-white">
             <div
               onClick={() => updateQuantity(item, "decrement")}
               className="flex items-center cursor-pointer justify-center hover:text-templatePrimary"
@@ -75,11 +76,20 @@ const CartPageListCard: React.FC<Props> = ({ item }) => {
               <Plus size={14} strokeWidth={1.5} />
             </div>
           </div>
-
+          {/* Product Prices */}
+          <div className="">
+            <h2 className="text-templateBrown text-sm">
+              {formatAmount(item.item_price, "usd")}
+            </h2>
+          </div>
+        </div>
+        <div>
           {item.variant_name.toLowerCase().includes("custom") && (
             <>
               {!authToken ? (
-                <CustomSelect list={["Arshad Ansari"]} />
+                <div className="w-1/3">
+                  <CustomSelect list={["Arshad Ansari"]} />
+                </div>
               ) : (
                 <Link
                   href={"/auth/login"}
@@ -90,13 +100,6 @@ const CartPageListCard: React.FC<Props> = ({ item }) => {
               )}
             </>
           )}
-
-          {/* Product Prices */}
-          <div className="">
-            <h2 className="text-templateBrown text-sm">
-              {formatAmount(item.item_price, "usd")}
-            </h2>
-          </div>
         </div>
       </div>
     </div>

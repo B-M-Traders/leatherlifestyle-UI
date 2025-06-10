@@ -19,7 +19,8 @@ const BottomTabs = () => {
   const { toggleCartDrawer, toggleMenuDrawer } = useToggleStore();
   const { totalItems } = useCart();
 
-  if (pathname.includes("/product")) return null;
+  if (pathname.includes("/product") || pathname.includes("/checkout"))
+    return null;
   return (
     <div className="lg:hidden select-none h-[65px] bg-white dark:bg-black border-t rounded-t-2xl grid grid-cols-5 fixed w-full bottom-0  left-0 my-auto bg-templateBackground text-templateText">
       <Link
