@@ -1,10 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useActionState } from "react";
+import { Button } from "../ui/button";
+import { signout } from "@/lib/action/customer";
 
 const ProfileSidebar = () => {
   const pathname = usePathname();
+
+  const handleLogout = async () => {
+    await signout()
+  }
 
   const tabs = [
     {
@@ -21,14 +27,14 @@ const ProfileSidebar = () => {
       {tabs.map((item, index) => (
         <Link
           key={index}
-          className={`block font-light hover:underline underline-offset-[5px] ${
-            pathname.includes(item.link) ? "underline" : ""
-          }`}
+          className={`block font-light hover:underline underline-offset-[5px] ${pathname.includes(item.link) ? "underline" : ""
+            }`}
           href={item.link}
         >
           {item.label}
         </Link>
       ))}
+      <button type="submit" onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -1,11 +1,9 @@
 "use client";
-import { Form, FormProps, Input } from "antd";
-import React, { useState } from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { useActionState } from "react";
 import Link from "next/link";
-import { useForm } from "antd/es/form/Form";
 import { LoaderCircle } from "lucide-react";
-import Image from "next/image";
+import { login } from "@/lib/action/customer";
+import Input from "./input";
 
 type FieldType = {
   password?: string;
@@ -13,15 +11,13 @@ type FieldType = {
 };
 
 const LoginForm = () => {
-  const [form] = useForm();
 
-  const [loading, setLoading] = useState(false);
+  const [message, formAction, isPending] = useActionState(login, {
+    success: false,
+    error: null,
+  })
 
-  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {};
-
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {};
+  console.log(message)
 
   return (
     <>
@@ -33,14 +29,31 @@ const LoginForm = () => {
           </p>
         </div>
         <div className="pt-2">
-          <Form
-            form={form}
-            name="login_form"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            size="large"
+          <form
+            className="space-y-2"
+            action={formAction}
           >
-            <Form.Item<FieldType>
+            <div className="mt-2">
+              <Input
+                label="Email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+              />
+            </div>
+            <div className="mt-2">
+              <Input
+                label="Password"
+                name="password"
+                type="password"
+                required
+                autoComplete="current-password"
+              />
+            </div>
+            {/* <CustomInput name="email" placeholder="Email" required={true} /> */}
+            {/* <CustomInput name="password" placeholder="Password" required={true} /> */}
+            {/* <Form.Item<FieldType>
               name="email"
               rules={[
                 {
@@ -55,9 +68,9 @@ const LoginForm = () => {
                 placeholder="Email"
                 className="border-gray-500 text-sm"
               />
-            </Form.Item>
+            </Form.Item> */}
 
-            <Form.Item<FieldType>
+            {/* <Form.Item<FieldType>
               className="-mt-2"
               name="password"
               rules={[
@@ -70,9 +83,9 @@ const LoginForm = () => {
                 className="border-gray-500  text-sm"
                 placeholder="Password"
               />
-            </Form.Item>
+            </Form.Item> */}
 
-            <div className="-mt-3 mb-4">
+            <div className=" mb-4">
               <Link
                 href={"/forgot-password"}
                 className="text-right block  text-xs tracking-wide font-medium cursor-pointer hover:text-templateBrown text-templateBrown"
@@ -82,21 +95,18 @@ const LoginForm = () => {
             </div>
 
             <div>
-              <Form.Item>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={`flex items-center -mt-4 capitalize justify-center w-full gap-2 border border-templateBrown bg-templateBrown hover:opacity-90 py-2.5 rounded-md text-sm tracking-widest text-white font-medium ${
-                    loading ? "cursor-not-allowed" : "cursor-pointer"
+              <button
+                type="submit"
+                disabled={isPending}
+                className={`flex items-center capitalize justify-center w-full gap-2 border border-templateBrown bg-templateBrown hover:opacity-90 py-2.5 rounded-md text-sm tracking-widest text-white font-medium ${isPending ? "cursor-not-allowed" : "cursor-pointer"
                   }`}
-                >
-                  {loading && (
-                    <LoaderCircle className="animate-spin" size={15} />
-                  )}
-                  {loading ? "Logging..." : "Log In"}
-                </button>
-              </Form.Item>
-              <p className="text-center -mt-4 text-templateText capitalize text-xs">
+              >
+                {isPending && (
+                  <LoaderCircle className="animate-spin" size={15} />
+                )}
+                {isPending ? "Logging..." : "Log In"}
+              </button>
+              <p className="text-center text-templateText capitalize text-xs">
                 New to {process.env.STORE_NAME?.replaceAll("-", " ")} ?{" "}
                 <Link
                   href={"/auth/register"}
@@ -106,7 +116,7 @@ const LoginForm = () => {
                 </Link>
               </p>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
     </>
