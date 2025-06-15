@@ -19,7 +19,6 @@ const CustomSelect: React.FC<Props> = ({
   onChange,
   required,
 }) => {
-  const isFloating = value !== "";
   const id = `select-${name}`;
 
   return (
@@ -31,24 +30,14 @@ const CustomSelect: React.FC<Props> = ({
           value={value}
           onChange={onChange}
           required={required}
-          className="peer w-full bg-transparent text-slate-700 text-sm border border-slate-200 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+          className="peer w-full bg-transparent text-[#242424] text-sm border border-gray-400 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-gray-600 hover:border-gray-600 shadow-sm focus:shadow-md appearance-none cursor-pointer"
         >
           {list.map((item, index) => (
-            <option value={item} key={index}>
+            <option value={item} defaultValue={value[0]} key={index}>
               {item}
             </option>
           ))}
         </select>
-
-        {/* Floating label */}
-        {/* <label
-          htmlFor={id}
-          className={`absolute bg-white px-1 left-2.5 font-light text-slate-400 text-sm transition-all transform origin-left
-            ${isFloating ? "-top-2 text-xs scale-90" : "top-3"}
-            peer-focus:-top-2 peer-focus:text-xs peer-focus:scale-90`}
-        >
-          {label || "Choose..."}
-        </label> */}
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
