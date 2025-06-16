@@ -115,7 +115,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
         <div className="flex items-center gap-2">
           <SearchBar />
           <Link
-            href={"/account"}
+            href={"/account/profile"}
             className="hidden lg:block p-1 lg:p-2 rounded-full hover:text-black cursor-pointer hover:bg-gray-100"
           >
             <User size={18} strokeWidth={1.5} />
