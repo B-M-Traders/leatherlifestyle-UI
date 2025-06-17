@@ -27,13 +27,19 @@ interface CheckoutState {
     phoneCode: string;
     phoneNumber: string;
   };
+  sameAsShippingAddress: boolean;
+  shippingFee: number;
+  setShippingFee: (fee: number) => void;
   setShippingAddress: (address: any) => void;
   setBillingAddress: (address: any) => void;
+  setSameAsShippingAddress: (value: boolean) => void;
   clearShippingAddress: () => void;
   clearBillingAddress: () => void;
 }
 
 const useCheckoutStore = create<CheckoutState>((set) => ({
+  sameAsShippingAddress: true,
+  shippingFee: 0,
   shippingAddress: {
     email: "",
     firstName: "",
@@ -61,6 +67,9 @@ const useCheckoutStore = create<CheckoutState>((set) => ({
     phoneNumber: "",
   },
 
+  setShippingFee: (fee: number) => set({ shippingFee: fee }),
+  setSameAsShippingAddress: (value: boolean) =>
+    set({ sameAsShippingAddress: value }),
   setShippingAddress: (address: any) => set({ shippingAddress: address }),
   setBillingAddress: (address: any) => set({ billingAddress: address }),
   clearShippingAddress: () =>

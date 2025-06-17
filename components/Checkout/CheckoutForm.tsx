@@ -1,7 +1,6 @@
 import React from "react";
 import CustomDivider from "../ui/custom-divider";
 import AccountDetails from "./AccountDetails";
-import DeliveryAndPayment from "./DeliveryAndPayment";
 
 const CheckoutForm = () => {
   return (
@@ -23,8 +22,6 @@ const CheckoutForm = () => {
       </div>
       <CustomDivider text={"or"} />
       <AccountDetails />
-      <CustomDivider />
-      <DeliveryAndPayment />
     </div>
   );
 };

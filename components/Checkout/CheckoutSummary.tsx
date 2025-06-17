@@ -6,11 +6,13 @@ import FallbackImage from "../Cards/FallbackImage";
 import { useFormat } from "@/hooks/useFormat";
 import SummaryCartCard from "./SummaryCartCard";
 import { useCart } from "@/hooks/useCart";
+import useCheckoutStore from "@/store/useCheckoutStore";
 
 const CheckoutSummary = () => {
   const { cartItems } = useCartStore();
   const { totalPrice } = useCart();
   const { formatAmount } = useFormat();
+  const { shippingFee } = useCheckoutStore();
   return (
     <div className="border rounded-lg space-y-6 p-5">
       <div className="space-y-3">
@@ -28,7 +30,7 @@ const CheckoutSummary = () => {
         </div>
         <div className="flex items-center justify-between">
           <p className="text-sm">Shipping</p>
-          <p className="text-gray-700 text-sm">{formatAmount(0)}</p>
+          <p className="text-gray-700 text-sm">{formatAmount(shippingFee)}</p>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-sm">Taxes</p>

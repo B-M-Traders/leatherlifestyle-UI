@@ -8,7 +8,7 @@ const Checkout = () => {
       <div className="w-full lg:w-[60%] ">
         <CheckoutForm />
       </div>
-      <div className="w-full lg:w-[40%]">
+      <div className="w-full sticky top-5 h-full lg:w-[40%]">
         <CheckoutSummary />
       </div>
     </div>
