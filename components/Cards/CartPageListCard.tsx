@@ -88,7 +88,10 @@ const CartPageListCard: React.FC<Props> = ({ item }) => {
             <>
               {!authToken ? (
                 <div className="w-1/3">
-                  <CustomSelect list={["Arshad Ansari"]} />
+                  <CustomSelect
+                    list={[{ label: "Arshad Ansari", code: "Arshad Ansari" }]}
+                    name="customSize"
+                  />
                 </div>
               ) : (
                 <Link

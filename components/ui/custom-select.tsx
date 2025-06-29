@@ -1,40 +1,52 @@
+"use client";
 import React from "react";
 
 interface Props {
-  list?: string[];
+  list?: { label: string; code: string }[];
   label?: string;
   className?: string;
+  name: string;
   value?: string;
-  name?: string;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  defaultValue?: string;
   required?: boolean;
+  disabled?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const CustomSelect: React.FC<Props> = ({
   list = [],
-  label,
-  className,
-  value = "",
+  label = "",
+  className = "w-full",
   name,
+  value,
+  defaultValue,
+  required = false,
+  disabled = false,
   onChange,
-  required,
 }) => {
   const id = `select-${name}`;
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={className}>
+      {label && (
+        <label htmlFor={id} className="block mb-1 text-xs text-gray-600">
+          {label}
+        </label>
+      )}
       <div className="relative">
         <select
           id={id}
           name={name}
           value={value}
-          onChange={onChange}
+          defaultValue={defaultValue}
           required={required}
-          className="peer w-full bg-transparent text-[#242424] text-sm border border-gray-400 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-gray-600 hover:border-gray-600 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+          disabled={disabled}
+          onChange={onChange}
+          className="w-full bg-transparent text-[#242424] text-sm border border-gray-400 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-gray-600 hover:border-gray-600 shadow-sm appearance-none cursor-pointer disabled:opacity-50"
         >
           {list.map((item, index) => (
-            <option value={item} defaultValue={value[0]} key={index}>
-              {item}
+            <option value={item.code} key={index}>
+              {item.label}
             </option>
           ))}
         </select>
@@ -50,7 +62,7 @@ const CustomSelect: React.FC<Props> = ({
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+            d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
           />
         </svg>
       </div>

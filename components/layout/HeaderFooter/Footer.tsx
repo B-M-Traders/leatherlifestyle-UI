@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Clock, Mail, Map, MessageCircleQuestion } from "lucide-react";
 import {
@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/accordion";
 import { menuItems } from "@/lib/Menudata";
 import Image from "next/image";
+import CustomSelect from "@/components/ui/custom-select";
+import { Country } from "country-state-city";
+import { Item } from "@radix-ui/react-accordion";
 
-// Types
 interface FooterLink {
   label: string;
   link: string;
@@ -138,6 +140,117 @@ const FooterSection: React.FC<FooterSection & { isMobile?: boolean }> = ({
     </div>
   );
 
+export const renderRegion = () => {
+  const countries = [
+    {
+      countryName: "United States",
+      countryCode: "US",
+      countryCallingCode: "+1",
+      currency: "USD",
+    },
+    {
+      countryName: "India",
+      countryCode: "IN",
+      countryCallingCode: "+91",
+      currency: "INR",
+    },
+    {
+      countryName: "Canada",
+      countryCode: "CA",
+      countryCallingCode: "+1",
+      currency: "CAD",
+    },
+    {
+      countryName: "United Kingdom",
+      countryCode: "GB",
+      countryCallingCode: "+44",
+      currency: "GBP",
+    },
+  ];
+  const selectRef = useRef<HTMLDivElement>(null);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<any>(countries[0]);
+
+  const handleCountrySelect = (item: any) => {
+    setSelectedCountry(item);
+    setIsCountryDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsCountryDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  return (
+    <div className={`w-[65%] space-y-2`}>
+      <label className="block mb-1 text-xs">Select Origin</label>
+      <div
+        ref={selectRef}
+        onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+        className="relative group w-full border cursor-pointer px-2 py-1 rounded-md flex items-center justify-between gap-4"
+      >
+        <div className="flex items-center gap-2">
+          <Image
+            src={`https://flagsapi.com/${selectedCountry?.countryCode}/flat/64.png`}
+            alt={selectedCountry?.countryName}
+            width={20}
+            className="h-[30px] w-[30px] object-contain"
+            height={20}
+          />
+          <p className="font-light text-sm">{selectedCountry?.countryName}</p>
+        </div>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.2"
+          stroke="currentColor"
+          className="h-5 w-5 mt-0.5 text-white pointer-events-none"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+          />
+        </svg>
+
+        <div
+          className={`absolute bottom-11 max-h-[400px] transition-all ease-in-out duration-300 overflow-hidden  rounded-md left-0 w-full bg-white  ${
+            isCountryDropdownOpen ? "p-2 max-h-[400px] overflow-y-auto" : "h-0"
+          }`}
+        >
+          {countries.map((item, idx) => (
+            <div
+              key={idx}
+              onClick={() => handleCountrySelect(item)}
+              className="flex items-center gap-2 text-templateBrown px-2 py-1 hover:bg-gray-200 rounded-md cursor-pointer"
+            >
+              <Image
+                src={`https://flagsapi.com/${item.countryCode}/flat/64.png`}
+                alt={item.countryName}
+                width={20}
+                className="h-[30px] w-[30px] object-contain"
+                height={20}
+              />
+              <p className="font-light text-sm">{item.countryName}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Footer: React.FC = () => {
   return (
     <div className="bg-templateBrown pb-4 lg:pb-0">
@@ -156,6 +269,8 @@ const Footer: React.FC = () => {
           {contactInfo.map((info, idx) => (
             <ContactItem key={idx} {...info} />
           ))}
+
+          {renderRegion()}
         </div>
         {footerSections.map((section, idx) => (
           <FooterSection key={idx} {...section} />
@@ -179,6 +294,7 @@ const Footer: React.FC = () => {
             <ContactItem key={idx} {...info} />
           ))}
         </div>
+        {renderRegion()}
         <Accordion type="single" collapsible>
           {footerSections.map((section, idx) => (
             <FooterSection key={idx} {...section} isMobile />

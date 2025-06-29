@@ -1,247 +1,336 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { CircleCheck } from "lucide-react";
-import useCheckoutStore from "@/store/useCheckoutStore";
-import useCustomerStore from "@/store/useCustomerStore";
 import CustomInput from "../ui/custom-input";
 import CustomSelect from "../ui/custom-select";
-import CustomDivider from "../ui/custom-divider";
+import useGeolocationStore from "@/store/useGeolocation";
+import { Edit, Loader } from "lucide-react";
+import { State, City } from "country-state-city";
 import DeliveryAndPayment from "./DeliveryAndPayment";
-
-const COUNTRY_LIST = ["India", "USA", "Canada"];
-const PHONE_CODE_LIST = ["+91", "+1"];
-const LS_KEY = "ah_checkout_shipping_address";
+import CustomDivider from "../ui/custom-divider";
 
 const AccountDetails = () => {
-  const { shippingAddress, setShippingAddress } = useCheckoutStore();
-  const { email } = useCustomerStore();
-  const [shippingSaved, setShippingSaved] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [editMode, setEditMode] = useState(true);
 
-  const getLocalStorageAddress = () => {
-    if (typeof window === "undefined") return {};
-    try {
-      const stored = localStorage.getItem(LS_KEY);
-      return stored ? JSON.parse(stored) : {};
-    } catch (err) {
-      return {};
-    }
-  };
+  const { geolocation } = useGeolocationStore();
 
-  const [formData, setFormData] = useState(() => {
-    const local = getLocalStorageAddress();
-    return {
-      email: email || local.email || "",
-      firstName: local.firstName || shippingAddress.firstName || "",
-      lastName: local.lastName || shippingAddress.lastName || "",
-      country: local.country || shippingAddress.country || COUNTRY_LIST[0],
-      address1: local.address1 || shippingAddress.address1 || "",
-      address2: local.address2 || shippingAddress.address2 || "",
-      city: local.city || shippingAddress.city || "",
-      province: local.province || shippingAddress.province || "",
-      postalCode: local.postalCode || shippingAddress.postalCode || "",
-      phoneCode:
-        local.phoneCode || shippingAddress.phoneCode || PHONE_CODE_LIST[0],
-      phoneNumber: local.phoneNumber || shippingAddress.phoneNumber || "",
-    };
+  const [shipping, setShipping] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    country: geolocation.countryName || "",
+    state: "",
+    city: "",
+    zipCode: "",
+    phoneCode: geolocation.countryCallingCode || "",
+    phone: "",
+    apartment: "",
+    address: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const [billing, setBilling] = useState({ ...shipping });
+  const [sameAsShipping, setSameAsShipping] = useState(true);
 
-  const onFinish = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShippingAddress(formData);
-    setShippingSaved(true);
-    localStorage.setItem(LS_KEY, JSON.stringify(formData));
-  };
+  const [states, setStates] = useState<any>([]);
+  const [cities, setCities] = useState<any>([]);
 
+  const [billingStates, setBillingStates] = useState<any>([]);
+  const [billingCities, setBillingCities] = useState<any>([]);
+
+  // Load state and city data
   useEffect(() => {
-    const local = getLocalStorageAddress();
-    const hasStoredData = Object.keys(local).length > 0;
-    const hasShippingData = Object.values(shippingAddress).some((val) => val);
-
-    if (hasStoredData || hasShippingData) {
-      setShippingAddress(local);
-      setShippingSaved(true);
+    const fetchedStates = State.getStatesOfCountry(geolocation.countryCode);
+    setStates(fetchedStates);
+    setBillingStates(fetchedStates);
+    if (fetchedStates.length > 0) {
+      setCities(
+        City.getCitiesOfState(geolocation.countryCode, fetchedStates[0].isoCode)
+      );
+      setBillingCities(
+        City.getCitiesOfState(geolocation.countryCode, fetchedStates[0].isoCode)
+      );
     }
-  }, []);
+  }, [geolocation.countryCode]);
+
+  // Keep billing in sync
+  useEffect(() => {
+    if (sameAsShipping) {
+      setBilling(shipping);
+    }
+  }, [sameAsShipping, shipping]);
+
+  const handleShippingChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setShipping((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleBillingChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setBilling((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      console.log("Submitted:", {
+        shipping,
+        billing: sameAsShipping ? shipping : billing,
+      });
+      setSubmitted(true);
+      setEditMode(false);
+      setLoading(false);
+    }, 500);
+  };
+
+  if (submitted && !editMode) {
+    return (
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold">Account Details</h2>
+            <button
+              className="text-templateBrown flex hover:underline underline-offset-4 items-center gap-2 text-sm  hover:opacity-90"
+              onClick={() => setEditMode(true)}
+            >
+              Edit
+              <Edit size={15} strokeWidth={1.5} />
+            </button>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="space-y-0.5 text-gray-700 font-light text-sm">
+              <h3 className="font-normal text-templateBrown mb-2 text-base">
+                Shipping Address
+              </h3>
+              <p>{shipping.email}</p>
+              <p>
+                {shipping.firstName} {shipping.lastName}
+              </p>
+              <p>
+                {shipping.address}, {shipping.apartment}
+              </p>
+              <p>
+                {shipping.city}, {shipping.state}, {shipping.country} -{" "}
+                {shipping.zipCode}
+              </p>
+              <p>
+                {shipping.phoneCode} {shipping.phone}
+              </p>
+            </div>
+            <div>
+              {!sameAsShipping && (
+                <div className="space-y-0.5 text-gray-700 font-light text-sm">
+                  <h3 className="font-normal text-templateBrown mb-2 text-base">
+                    Billing Address
+                  </h3>
+                  <p>{billing.email}</p>
+                  <p>
+                    {billing.firstName} {billing.lastName}
+                  </p>
+                  <p>
+                    {billing.address}, {billing.apartment}
+                  </p>
+                  <p>
+                    {billing.city}, {billing.state}, {billing.country} -{" "}
+                    {billing.zipCode}
+                  </p>
+                  <p>
+                    {shipping.phoneCode} {shipping.phone}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <CustomDivider />
+        {submitted && <DeliveryAndPayment />}
+      </div>
+    );
+  }
 
   return (
     <>
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-medium flex items-center gap-2">
-            Account details
-            {shippingSaved && (
-              <CircleCheck
-                size={20}
-                strokeWidth={1}
-                fill="#85ffa5"
-                className="text-[#242424]"
-              />
-            )}
-          </h2>
-          {shippingSaved && (
-            <span
-              onClick={() => setShippingSaved(false)}
-              className="underline underline-offset-4 cursor-pointer hover:opacity-90 block text-sm text-gray-700"
-            >
-              Edit
-            </span>
-          )}
-        </div>
-        {shippingSaved ? (
-          <div className="space-y-2">
-            <h3 className="text-[15px]">Shipping Address</h3>
-            <div className="text-[13px] tracking-wide font-light text-gray-700">
-              <p>
-                {shippingAddress.firstName + " " + shippingAddress.lastName}
-              </p>
-              <p>{shippingAddress.email}</p>
-              <p>
-                {shippingAddress.phoneCode + " " + shippingAddress.phoneNumber}
-              </p>
-              <p>
-                {shippingAddress.address1 +
-                  ", " +
-                  shippingAddress.address2 +
-                  ", " +
-                  shippingAddress.city +
-                  ", " +
-                  shippingAddress.province +
-                  ", " +
-                  shippingAddress.postalCode +
-                  ", " +
-                  shippingAddress.country}
-              </p>
-            </div>
+        <h2 className="text-xl font-medium">Account details</h2>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <CustomInput
+            name="email"
+            placeholder="Email"
+            type="email"
+            required
+            value={shipping.email}
+            onChange={handleShippingChange}
+          />
+          <div className="flex gap-4">
+            <CustomInput
+              name="firstName"
+              placeholder="First Name"
+              required
+              value={shipping.firstName}
+              onChange={handleShippingChange}
+            />
+            <CustomInput
+              name="lastName"
+              placeholder="Last Name"
+              value={shipping.lastName}
+              onChange={handleShippingChange}
+            />
           </div>
-        ) : (
-          <form onSubmit={onFinish} className="space-y-4">
-            <CustomInput
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              type="email"
-              disable={email ? true : false}
-              required={true}
-              onChange={handleChange}
-            />
-            <div className="flex gap-3">
-              <CustomInput
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                type="text"
-                required={true}
-                onChange={handleChange}
-              />
-              <CustomInput
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                type="text"
-                required={false}
-                onChange={handleChange}
-              />
-            </div>
+          <CustomInput
+            name="country"
+            placeholder="Country"
+            disabled
+            required
+            value={geolocation.countryName}
+          />
+          <CustomInput
+            name="apartment"
+            placeholder="Apartment"
+            value={shipping.apartment}
+            onChange={handleShippingChange}
+          />
+          <CustomInput
+            name="address"
+            placeholder="Address"
+            required
+            value={shipping.address}
+            onChange={handleShippingChange}
+          />
+          <div className="flex gap-4">
             <CustomSelect
-              label="Select Country"
-              list={COUNTRY_LIST}
-              value={formData.country}
-              name="country"
-              required={true}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, country: e.target.value }))
-              }
+              list={states.map((s: any) => ({
+                label: s.name,
+                code: s.isoCode,
+              }))}
+              name="state"
+              value={shipping.state}
+              onChange={(e) => {
+                const selected = e.target.value;
+                setShipping((prev) => ({ ...prev, state: selected }));
+                setCities(
+                  City.getCitiesOfState(geolocation.countryCode, selected)
+                );
+              }}
+              required
             />
-            <CustomInput
-              name="address1"
-              placeholder="Address line 01"
-              value={formData.address1}
-              type="text"
-              required={true}
-              onChange={handleChange}
-            />
-            <CustomInput
-              name="address2"
-              placeholder="Address line 02 (Optional)"
-              value={formData.address2}
-              type="text"
-              required={false}
-              onChange={handleChange}
-            />
-            <CustomInput
+            <CustomSelect
+              list={cities.map((c: any) => ({ label: c.name, code: c.name }))}
               name="city"
-              placeholder="City"
-              value={formData.city}
-              type="text"
-              required={true}
-              onChange={handleChange}
+              value={shipping.city}
+              onChange={handleShippingChange}
+              required
             />
-            <div className="flex items-center gap-3">
-              <CustomInput
-                name="province"
-                placeholder="Province"
-                value={formData.province}
-                type="text"
-                required={true}
-                onChange={handleChange}
-              />
-              <CustomInput
-                name="postalCode"
-                placeholder="Postal Code"
-                value={formData.postalCode}
-                type="number"
-                required={true}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-1/5">
-                <CustomSelect
-                  label=""
-                  list={PHONE_CODE_LIST}
-                  value={formData.phoneCode}
-                  name="phoneCode"
-                  required={true}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      phoneCode: e.target.value,
-                    }))
-                  }
+            <CustomInput
+              name="zipCode"
+              placeholder="Zip Code"
+              value={shipping.zipCode}
+              onChange={handleShippingChange}
+              required
+            />
+          </div>
+          <div className="flex gap-4">
+            <CustomInput
+              className="w-28"
+              disabled
+              required
+              name="phoneCode"
+              value={geolocation.countryCallingCode}
+              placeholder="Code"
+            />
+            <CustomInput
+              name="phone"
+              placeholder="Phone"
+              value={shipping.phone}
+              onChange={handleShippingChange}
+              required
+            />
+          </div>
+
+          <h2 className="text-xl pt-2 font-medium">Billing details</h2>
+          <div className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={sameAsShipping}
+              onChange={() => setSameAsShipping((prev) => !prev)}
+            />
+            <label>Same as shipping address</label>
+          </div>
+
+          {!sameAsShipping && (
+            <div className="space-y-4">
+              <div className="flex gap-4">
+                <CustomInput
+                  name="firstName"
+                  placeholder="First Name"
+                  value={billing.firstName}
+                  onChange={handleBillingChange}
+                />
+                <CustomInput
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={billing.lastName}
+                  onChange={handleBillingChange}
                 />
               </div>
               <CustomInput
-                name="phoneNumber"
-                placeholder="Phone"
-                value={formData.phoneNumber}
-                type="number"
-                required={true}
-                onChange={handleChange}
+                name="address"
+                placeholder="Address"
+                value={billing.address}
+                onChange={handleBillingChange}
+                required
               />
+              <div className="flex gap-4">
+                <CustomSelect
+                  list={billingStates.map((s: any) => ({
+                    label: s.name,
+                    code: s.isoCode,
+                  }))}
+                  name="state"
+                  value={billing.state}
+                  onChange={(e) => {
+                    const selected = e.target.value;
+                    setBilling((prev) => ({ ...prev, state: selected }));
+                    setBillingCities(
+                      City.getCitiesOfState(geolocation.countryCode, selected)
+                    );
+                  }}
+                  required
+                />
+                <CustomSelect
+                  list={billingCities.map((c: any) => ({
+                    label: c.name,
+                    code: c.name,
+                  }))}
+                  name="city"
+                  value={billing.city}
+                  onChange={handleBillingChange}
+                  required
+                />
+                <CustomInput
+                  name="zipCode"
+                  placeholder="Zip Code"
+                  value={billing.zipCode}
+                  onChange={handleBillingChange}
+                  required
+                />
+              </div>
             </div>
-            <button
-              type="submit"
-              className="bg-templateBrown font-light text-sm text-white py-3 px-6 rounded-md"
-            >
-              Save and Continue
-            </button>
-          </form>
-        )}
+          )}
+
+          <button
+            type="submit"
+            className="bg-templateBrown flex items-center justify-center text-white w-full py-2.5 rounded-md"
+          >
+            {loading && <Loader size={16} className="animate-spin mr-2" />}
+            {loading ? "Submitting..." : "Submit"}
+          </button>
+        </form>
       </div>
-      {shippingSaved && (
-        <>
-          <CustomDivider />
-          <DeliveryAndPayment />
-        </>
-      )}
     </>
   );
 };
