@@ -7,7 +7,7 @@ const CheckoutForm = () => {
     <div className="space-y-8">
       <div className="space-y-3">
         <h2 className="text-xl font-medium">Express Checkout</h2>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col lg:flex-row items-center gap-2">
           <button className="bg-green-500 hover:bg-green-400 flex items-center justify-center h-12 text-[#242424] w-full font-semibold tracking-wide rounded-md">
             Pay with link
           </button>
