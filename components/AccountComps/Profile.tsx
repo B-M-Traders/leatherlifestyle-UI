@@ -1,56 +1,121 @@
-import React from "react";
-import CustomInput from "../ui/custom-input";
+"use client";
+import React, { useState } from "react";
+import { Pencil, UserRound } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
 
 const Profile = () => {
+  const [editMode, setEditMode] = useState("");
   return (
-    <div className="space-y-8">
-      <div>
-        <h3 className="text-xl">Personal Information</h3>
-        <p className="text-xs tracking-wide font-light text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, iure.
-        </p>
-      </div>
-      <div>
-        <form>
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <CustomInput name="firstName" placeholder="First Name" required />
-              <CustomInput name="lastName" placeholder="Last Name" required />
-            </div>
-            <CustomInput name="email" placeholder="Email" required />
-            <CustomInput name="phone" placeholder="Phone" required />
-            <button className="bg-templateBrown flex items-center justify-center text-white w-full py-2.5 rounded-md">
-              Submit
-            </button>
+    <div className="space-y-10">
+      <h2 className="text-xl uppercase tracking-wide font-normal flex items-center gap-2">
+        <UserRound size={20} strokeWidth={1.5} /> My Profile
+      </h2>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-light uppercase tracking-wide">
+            Basic Information
+          </h3>
+          <p
+            onClick={() => setEditMode("full")}
+            className="underline flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
+          >
+            <Pencil size={12} strokeWidth={1.5} /> Edit
+          </p>
+        </div>
+        <div className="space-y-4">
+          <div className="text-sm grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">First Name</p>
+            <p className="font-normal tracking-wide">Ansari</p>
           </div>
-        </form>
+          <div className="text-sm grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">Last Name</p>
+            <p className="font-normal tracking-wide">Afroz</p>
+          </div>
+          <div className="text-sm grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">Gender</p>
+            <p className="font-normal tracking-wide">-</p>
+          </div>
+          <div className="text-sm grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">
+              Date of birth
+            </p>
+            <p className="font-normal tracking-wide">-</p>
+          </div>
+        </div>
       </div>
       <hr />
-      <div>
-        <h3 className="text-xl">Update Password</h3>
-        <p className="text-xs tracking-wide font-light text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, iure.
-        </p>
-      </div>
-      <div>
-        <form>
-          <div className="space-y-4">
-            <CustomInput
-              name="newPassword"
-              placeholder="New Password"
-              required
-            />
-            <CustomInput
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              required
-            />
-            <button className="bg-templateBrown flex items-center justify-center text-white w-full py-2.5 rounded-md">
-              Update password
-            </button>
+      <div className="space-y-6">
+        <h3 className="text-base font-light uppercase tracking-wide">
+          Contact Information
+        </h3>
+        <div className="space-y-4">
+          <div className="text-sm relative grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">Email</p>
+            <p className="font-normal tracking-wide">
+              ansariafroz720@gmail.com
+            </p>
+            <p
+              onClick={() => setEditMode("email")}
+              className="underline absolute right-0 top-0 flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
+            >
+              <Pencil size={12} strokeWidth={1.5} /> Edit
+            </p>
           </div>
-        </form>
+          <div className="text-sm relative grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">
+              Mobile Number
+            </p>
+            <p className="font-normal tracking-wide">+91 72088 20113 </p>
+            <p
+              onClick={() => setEditMode("phone")}
+              className="underline absolute right-0 top-0 flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
+            >
+              <Pencil size={12} strokeWidth={1.5} /> Edit
+            </p>
+          </div>
+          <div className="text-sm relative grid grid-cols-[30%_70%]">
+            <p className="font-light tracking-wide text-gray-600">Password</p>
+            <p className="font-normal tracking-wide">********</p>
+            <p
+              onClick={() => setEditMode("password")}
+              className="underline absolute right-0 top-0 flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
+            >
+              <Pencil size={12} strokeWidth={1.5} /> Change
+            </p>
+          </div>
+        </div>
       </div>
+      <Dialog
+        open={!!editMode}
+        onOpenChange={(open) => !open && setEditMode("")}
+      >
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit {editMode}</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you&apos;re
+              done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4"></div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
