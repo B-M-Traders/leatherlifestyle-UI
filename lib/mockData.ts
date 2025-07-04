@@ -74,3 +74,30 @@ export const productDetail = {
     },
   ],
 };
+
+export const address: any[] = [
+  {
+    isDefault: true,
+    firstName: "Ansari",
+    lastName: "Afroz",
+    country: "India",
+    state: "Maharashtra",
+    city: "Mumbai",
+    zipCode: "400017",
+    phoneCode: "+91",
+    phone: "7208820113",
+    address: "Sion Dharavu",
+  },
+  {
+    isDefault: false,
+    firstName: "Ansari",
+    lastName: "Afroz",
+    country: "India",
+    state: "Maharashtra",
+    city: "Mumbai",
+    zipCode: "400017",
+    phoneCode: "+91",
+    phone: "7208820113",
+    address: "Sion Dharavu",
+  },
+];

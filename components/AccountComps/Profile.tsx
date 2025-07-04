@@ -18,7 +18,7 @@ const Profile = () => {
   return (
     <div className="space-y-10">
       <h2 className="text-xl uppercase tracking-wide font-normal flex items-center gap-2">
-        <UserRound size={20} strokeWidth={1.5} /> My Profile
+        <UserRound size={24} strokeWidth={1} /> My Profile
       </h2>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
