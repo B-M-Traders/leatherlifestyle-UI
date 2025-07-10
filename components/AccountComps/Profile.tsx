@@ -18,7 +18,7 @@ const Profile = () => {
   const [editMode, setEditMode] = useState("");
   return (
     <div className="space-y-10">
-      <h2 className="text-xl uppercase tracking-wide font-normal flex items-center gap-2">
+      <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
         <UserRound size={24} strokeWidth={1} /> My Profile
       </h2>
       <div className="space-y-6">
@@ -26,12 +26,12 @@ const Profile = () => {
           <h3 className="text-base font-light uppercase tracking-wide">
             Basic Information
           </h3>
-          <p
+          <button
             onClick={() => setEditMode("basic-information")}
             className="underline flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
           >
             <Pencil size={12} strokeWidth={1.5} /> Edit
-          </p>
+          </button>
         </div>
         <div className="space-y-4">
           <div className="text-sm grid grid-cols-[30%_70%]">
@@ -65,34 +65,34 @@ const Profile = () => {
             <p className="font-normal tracking-wide">
               ansariafroz720@gmail.com
             </p>
-            <p
+            <button
               onClick={() => setEditMode("email")}
               className="underline absolute right-0 top-0 flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
             >
               <Pencil size={12} strokeWidth={1.5} /> Edit
-            </p>
+            </button>
           </div>
           <div className="text-sm relative grid grid-cols-[30%_70%]">
             <p className="font-light tracking-wide text-gray-600">
               Mobile Number
             </p>
             <p className="font-normal tracking-wide">+91 72088 20113 </p>
-            <p
+            <button
               onClick={() => setEditMode("phone")}
               className="underline absolute right-0 top-0 flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
             >
               <Pencil size={12} strokeWidth={1.5} /> Edit
-            </p>
+            </button>
           </div>
           <div className="text-sm relative grid grid-cols-[30%_70%]">
             <p className="font-light tracking-wide text-gray-600">Password</p>
             <p className="font-normal tracking-wide">********</p>
-            <p
+            <button
               onClick={() => setEditMode("password")}
               className="underline absolute right-0 top-0 flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
             >
               <Pencil size={12} strokeWidth={1.5} /> Change
-            </p>
+            </button>
           </div>
         </div>
       </div>

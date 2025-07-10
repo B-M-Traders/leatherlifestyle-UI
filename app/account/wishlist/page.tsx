@@ -6,7 +6,7 @@ import React from "react";
 
 const Wishlistpage = () => {
   return (
-    <div className="space-y-4 lg:space-y-0">
+    <div className="space-y-6 lg:space-y-0">
       <Back />
       <Wishlist />
     </div>

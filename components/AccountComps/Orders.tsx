@@ -5,8 +5,8 @@ import OrdersListCard from "./OrdersListCard";
 const Orders = () => {
   const orders: any[] = [{}];
   return (
-    <div className="space-y-10">
-      <h2 className="text-xl uppercase tracking-wide font-normal flex items-center gap-2">
+    <div className="space-y-5 lg:space-y-10">
+      <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
         <Package size={24} strokeWidth={1} /> My Orders
       </h2>
       {orders.length > 0 ? (

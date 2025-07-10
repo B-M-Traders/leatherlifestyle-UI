@@ -11,7 +11,7 @@ const Mylayout = ({ children }: { children: React.ReactNode }) => {
           <ProfileSidebar />
         </div>
         <div className="hidden lg:block w-full h-px lg:h-auto lg:w-px bg-gray-200" />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 ">{children}</div>
       </div>
     </div>
   );

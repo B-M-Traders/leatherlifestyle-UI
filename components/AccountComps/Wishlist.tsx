@@ -5,8 +5,8 @@ import WishlistCard from "../Cards/WishlistCard";
 const Wishlist = () => {
   const wishlist: any[] = [{}];
   return (
-    <div className="space-y-10">
-      <h2 className="text-xl uppercase tracking-wide font-normal flex items-center gap-2">
+    <div className="space-y-5 lg:space-y-10">
+      <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
         <Heart size={24} strokeWidth={1} /> My Wishlists
       </h2>
       {wishlist.length > 0 ? (

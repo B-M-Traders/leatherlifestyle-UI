@@ -14,7 +14,7 @@ const Back = () => {
           Back
         </Link>
       </div>
-      <div className="lg:hidden bg-templateBrown/30 h-[1px] w-full"></div>
+      <div className="lg:hidden bg-templateBrown/20 h-[1px] w-full"></div>
     </>
   );
 };
