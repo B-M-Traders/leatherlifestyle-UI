@@ -31,7 +31,6 @@ const Address = () => {
     type: "",
   });
 
-  // Initialize on first load (only for Add)
   useEffect(() => {
     if (!editData && geolocation.countryCode) {
       const country = geolocation.countryName;
@@ -62,7 +61,6 @@ const Address = () => {
     }
   }, [geolocation, editData]);
 
-  // Populate form when editing
   useEffect(() => {
     if (editData) {
       const countryCode = geolocation.countryCode;

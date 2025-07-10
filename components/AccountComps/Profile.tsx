@@ -9,9 +9,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
+import CustomInput from "../ui/custom-input";
+import CustomSelect from "../ui/custom-select";
 
 const Profile = () => {
   const [editMode, setEditMode] = useState("");
@@ -26,7 +27,7 @@ const Profile = () => {
             Basic Information
           </h3>
           <p
-            onClick={() => setEditMode("full")}
+            onClick={() => setEditMode("basic-information")}
             className="underline flex items-center gap-1 underline-offset-2 text-xs cursor-pointer font-light text-templateBrown"
           >
             <Pencil size={12} strokeWidth={1.5} /> Edit
@@ -45,12 +46,12 @@ const Profile = () => {
             <p className="font-light tracking-wide text-gray-600">Gender</p>
             <p className="font-normal tracking-wide">-</p>
           </div>
-          <div className="text-sm grid grid-cols-[30%_70%]">
+          {/* <div className="text-sm grid grid-cols-[30%_70%]">
             <p className="font-light tracking-wide text-gray-600">
               Date of birth
             </p>
             <p className="font-normal tracking-wide">-</p>
-          </div>
+          </div> */}
         </div>
       </div>
       <hr />
@@ -99,21 +100,97 @@ const Profile = () => {
         open={!!editMode}
         onOpenChange={(open) => !open && setEditMode("")}
       >
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[450px]">
           <DialogHeader>
-            <DialogTitle>Edit {editMode}</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="capitalize font-normal text-base tracking-normal">
+              Update {editMode.replaceAll("-", " ")}
+            </DialogTitle>
+            <DialogDescription className="text-[12px] font-light">
               Make changes to your profile here. Click save when you&apos;re
               done.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4"></div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
+          <div>
+            {editMode === "basic-information" && (
+              <form action="">
+                <div className="grid gap-3 grid-cols-2">
+                  <CustomInput name="firstName" required />
+                  <CustomInput name="lastName" required />
+                  <div className="col-span-2">
+                    <CustomSelect
+                      name="gender"
+                      list={[
+                        { label: "Male", code: "male" },
+                        { label: "Female", code: "female" },
+                        { label: "Other", code: "other" },
+                      ]}
+                    />
+                  </div>
+                </div>
+                <div className="w-full mt-6 flex items-center justify-end gap-2">
+                  <DialogClose asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <Button className="bg-templateBrown">Update</Button>
+                </div>
+              </form>
+            )}
+            {editMode === "email" && (
+              <form action="">
+                <div className="">
+                  <CustomInput
+                    name="email"
+                    placeholder="Enter email"
+                    required
+                  />
+                </div>
+                <div className="w-full mt-6 flex items-center justify-end gap-2">
+                  <DialogClose asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <Button className="bg-templateBrown">Update Email</Button>
+                </div>
+              </form>
+            )}
+            {editMode === "phone" && (
+              <form action="">
+                <div className="">
+                  <CustomInput
+                    name="number"
+                    placeholder="Enter email"
+                    required
+                  />
+                </div>
+                <div className="w-full mt-6 flex items-center justify-end gap-2">
+                  <DialogClose asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <Button className="bg-templateBrown">Update Phone</Button>
+                </div>
+              </form>
+            )}
+            {editMode === "password" && (
+              <form action="" className="space-y-3">
+                <CustomInput
+                  name="newPassword"
+                  placeholder="New Password"
+                  required
+                />
+                <CustomInput
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  required
+                />
+                <div className="w-full mt-6 flex items-center justify-end gap-2">
+                  <DialogClose asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <Button className="bg-templateBrown">Update Password</Button>
+                </div>
+              </form>
+            )}
+          </div>
+          <DialogFooter></DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

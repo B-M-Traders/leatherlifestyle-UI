@@ -1,5 +1,13 @@
 "use client";
-import { BookUser, Heart, Package, PencilRuler, UserRound } from "lucide-react";
+import {
+  BookUser,
+  Heart,
+  LogOut,
+  Package,
+  PencilRuler,
+  UserRound,
+  ChevronRight,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -51,27 +59,36 @@ const ProfileSidebar = () => {
           <p className="font-light text-gray-600 text-[13px] tracking-wide">
             ansariafrozahmed@gmail.com
           </p>
+          <button className="underline-offset-2 flex text-[13px] underline text-templateBrown font-light items-center gap-2">
+            Logout
+            <LogOut size={14} strokeWidth={1.5} />
+          </button>
         </div>
       </div>
       <hr />
-      <div className="space-y-2 flex flex-wrap lg:flex-col">
+      <div className="space-y-4 lg:Space-y-2 flex flex-col">
         {tabs.map((item, index) => (
           <Link
             key={index}
-            className={`flex w-full border-l-4 items-center gap-3  px-3 py-2.5  ${
+            className={`flex lg:w-full border-l-4 items-center justify-between gap-3 px-2 py-2.5  ${
               pathname.includes(item.link)
                 ? " border-templateBrown text-templateBrown"
                 : "border-white hover:bg-gray-100 hover:border-gray-300"
             }`}
             href={item.link}
           >
-            <span className="block">{item.icon}</span>
-            <span className="block">
-              <p className=" text-sm tracking-wide !font-light">{item.label}</p>
-              <p className=" text-[10px] tracking-wide !font-light">
-                {item.text}
-              </p>
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="block">{item.icon}</span>
+              <span className="block">
+                <p className=" text-sm tracking-wide !font-light">
+                  {item.label}
+                </p>
+                <p className=" text-[10px] tracking-wide !font-light">
+                  {item.text}
+                </p>
+              </span>
+            </div>
+            <ChevronRight className="lg:hidden" strokeWidth={1} />
           </Link>
         ))}
       </div>

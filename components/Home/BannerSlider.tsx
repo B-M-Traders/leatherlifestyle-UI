@@ -6,20 +6,18 @@ const BannerSlider = () => {
     <div className="h-[75vh] lg:h-[85vh] w-full relative">
       <div className="h-full w-full hidden lg:block">
         <Image
-          src={
-            "https://www.thejacketmaker.com/cdn/shop/files/2048_x_1024_-_TJM.webp?v=1695726287"
-          }
+          src={"/banners/3.jpg"}
           alt={" Banner"}
           quality={100}
           sizes="100vw"
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-cover object-center"
           height={9}
           width={16}
         />
       </div>
       <div className="h-full w-full lg:hidden">
         <Image
-          src={"/mobileBanner.jpg"}
+          src={"/banners/3.jpg"}
           alt={" Banner"}
           quality={100}
           sizes="100vw"
@@ -28,6 +26,7 @@ const BannerSlider = () => {
           width={3}
         />
       </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent"></div>
     </div>
   );
 };

@@ -1,7 +1,18 @@
-import { redirect } from "next/navigation";
+import Profile from "@/components/AccountComps/Profile";
+import ProfileSidebar from "@/components/AccountComps/ProfileSidebar";
+import React from "react";
 
-const Account = () => {
-  redirect("/account/profile");
+const MyPage = () => {
+  return (
+    <div>
+      <div className="lg:hidden">
+        <ProfileSidebar />
+      </div>
+      <div className="hidden lg:block">
+        <Profile />
+      </div>
+    </div>
+  );
 };
 
-export default Account;
+export default MyPage;
