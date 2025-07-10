@@ -125,7 +125,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
       </nav>
 
       {activeMenu && (
-        <div className="bg-black/75 absolute top-full left-0 w-full h-screen"></div>
+        <div className="bg-black/30 backdrop-blur-sm absolute top-full left-0 w-full h-screen"></div>
       )}
 
       {/* MEGAMENU */}

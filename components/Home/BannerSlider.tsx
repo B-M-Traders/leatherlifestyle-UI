@@ -17,7 +17,7 @@ const BannerSlider = () => {
       </div>
       <div className="h-full w-full lg:hidden">
         <Image
-          src={"/banners/3.jpg"}
+          src={"/mobileBanner.jpg"}
           alt={" Banner"}
           quality={100}
           sizes="100vw"

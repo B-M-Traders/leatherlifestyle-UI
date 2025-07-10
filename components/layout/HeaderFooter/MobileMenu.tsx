@@ -58,7 +58,8 @@ const MobileMenu = () => {
       {toggleDrawer && (
         <div
           onClick={handleToggle}
-          className="fixed top-0 left-0 w-full h-full bg-black/75 z-10"
+          className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm  z-10"
+          // className="bg-black/30 backdrop-blur-sm fixed top-0 bottom-0 left-0 right-0 z-50 transition-transform duration-300 "
         />
       )}
 
