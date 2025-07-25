@@ -6,7 +6,6 @@ import {
   Package,
   PencilRuler,
   UserRound,
-  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -48,6 +47,10 @@ const ProfileSidebar = () => {
     },
   ];
 
+  // Check if any tab except profile matches the pathname
+  const otherTabs = tabs.filter((t) => t.link !== "/account/profile");
+  const isOtherTabActive = otherTabs.some((tab) => pathname.includes(tab.link));
+
   return (
     <div className="space-y-3 lg:space-y-6 w-full">
       <div className="flex items-center gap-2">
@@ -66,30 +69,40 @@ const ProfileSidebar = () => {
         </div>
       </div>
       <hr />
-      <div className=" lg:Space-y-2 overflow-x-scroll lg:overflow-auto flex gap-1.5 lg:flex-col">
-        {tabs.map((item, index) => (
-          <Link
-            key={index}
-            className={`border-2 rounded-md lg:rounded-none lg:border-x-0 lg:border-y-0 lg:border-l-4 inline-block px-5 lg:px-3 py-2.5  ${
-              pathname.includes(item.link)
-                ? " border-templateBrown bg-templateBrown lg:bg-white text-white lg:text-templateBrown"
-                : "border-gray-200 lg:border-white hover:bg-gray-100 hover:border-gray-300"
-            }`}
-            href={item.link}
-          >
-            <div className="flex w-full flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-3">
-              <span className="block">{item.icon}</span>
-              <span className="block">
-                <p className=" text-sm text-center lg:text-left tracking-wide !font-light">
-                  {item.label}
-                </p>
-                <p className="hidden lg:block text-[10px] tracking-wide !font-light">
-                  {item.text}
-                </p>
-              </span>
-            </div>
-          </Link>
-        ))}
+      <div className="lg:space-y-2 overflow-x-scroll lg:overflow-auto flex gap-1.5 lg:flex-col">
+        {tabs.map((item, index) => {
+          const isActive =
+            pathname.includes(item.link) ||
+            (!isOtherTabActive && item.link === "/account/profile");
+
+          return (
+            <Link
+              key={index}
+              className={`border-2 rounded-md lg:rounded-none lg:border-x-0 lg:border-y-0 lg:border-l-4 inline-block px-5 lg:px-3 py-2.5 ${
+                isActive
+                  ? "border-templateBrown lg:bg-white text-templateBrown"
+                  : "border-gray-200 lg:border-white hover:bg-gray-100 hover:border-gray-300"
+              }`}
+              href={item.link}
+            >
+              <div className="flex w-full flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-3">
+                <span className="block">{item.icon}</span>
+                <span className="block">
+                  <p
+                    className={`text-[13px] md:text-sm text-center lg:text-left tracking-wide ${
+                      isActive ? "font-medium" : "!font-light"
+                    }`}
+                  >
+                    {item.label}
+                  </p>
+                  <p className="hidden lg:block text-[10px] tracking-wide !font-light">
+                    {item.text}
+                  </p>
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

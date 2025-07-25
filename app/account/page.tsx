@@ -1,5 +1,4 @@
-import Profile from "@/components/AccountComps/Profile";
-import ProfileSidebar from "@/components/AccountComps/ProfileSidebar";
+import Profile from "@/components/AccountComps/Profile/Profile";
 import React from "react";
 
 const MyPage = () => {
