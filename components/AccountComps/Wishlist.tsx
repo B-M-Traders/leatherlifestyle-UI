@@ -6,9 +6,12 @@ const Wishlist = () => {
   const wishlist: any[] = [{}];
   return (
     <div className="space-y-5 lg:space-y-10">
-      <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
-        <Heart size={24} strokeWidth={1} /> My Wishlists
-      </h2>
+      <div className="space-y-0.5">
+        <h2 className="text-lg text-templateBrown lg:text-xl uppercase tracking-wide font-medium flex items-center gap-2">
+          <Heart size={20} /> Wishlist
+        </h2>
+        <p className="text-xs font-light">Manage your personal information</p>
+      </div>
       {wishlist.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-6">
           {wishlist.map((item, index) => (

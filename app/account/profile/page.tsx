@@ -5,12 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 const Profilepage = () => {
-  return (
-    <div className="space-y-6 lg:space-y-0">
-      <Back />
-      <Profile />
-    </div>
-  );
+  return <Profile />;
 };
 
 export default Profilepage;

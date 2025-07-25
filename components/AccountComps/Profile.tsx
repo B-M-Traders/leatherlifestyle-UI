@@ -18,9 +18,12 @@ const Profile = () => {
   const [editMode, setEditMode] = useState("");
   return (
     <div className="space-y-10">
-      <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
-        <UserRound size={24} strokeWidth={1} /> My Profile
-      </h2>
+      <div className="space-y-0.5">
+        <h2 className="text-lg text-templateBrown lg:text-xl uppercase tracking-wide font-medium flex items-center gap-2">
+          <UserRound size={20} /> Profile
+        </h2>
+        <p className="text-xs font-light">Manage your personal information</p>
+      </div>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-light uppercase tracking-wide">

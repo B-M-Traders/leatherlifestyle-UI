@@ -5,12 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 const Addresspage = () => {
-  return (
-    <div className="space-y-4 lg:space-y-0">
-      <Back />
-      <Address />
-    </div>
-  );
+  return <Address />;
 };
 
 export default Addresspage;

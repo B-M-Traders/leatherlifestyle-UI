@@ -6,9 +6,12 @@ const Orders = () => {
   const orders: any[] = [{}];
   return (
     <div className="space-y-5 lg:space-y-10">
-      <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
-        <Package size={24} strokeWidth={1} /> My Orders
-      </h2>
+      <div className="space-y-0.5">
+        <h2 className="text-lg text-templateBrown lg:text-xl uppercase tracking-wide font-medium flex items-center gap-2">
+          <Package size={20} /> Orders
+        </h2>
+        <p className="text-xs font-light">Manage your placed orders</p>
+      </div>
       {orders.length > 0 ? (
         <div className="space-y-4">
           {orders.map((item, index) => (

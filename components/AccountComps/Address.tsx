@@ -119,9 +119,13 @@ const Address = () => {
   return (
     <div className="space-y-10">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl uppercase tracking-wide font-normal flex items-center gap-2">
-          <BookUser size={24} strokeWidth={1} /> My Addresses
-        </h2>
+        <div className="space-y-0.5">
+          <h2 className="text-lg text-templateBrown lg:text-xl uppercase tracking-wide font-medium flex items-center gap-2">
+            <BookUser size={20} /> Addresses
+          </h2>
+          <p className="text-xs font-light">Manage your address</p>
+        </div>
+
         {address.length > 0 && (
           <button
             onClick={() => {

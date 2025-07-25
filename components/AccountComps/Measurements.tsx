@@ -71,9 +71,12 @@ const Measurements = () => {
     <>
       <div className="space-y-5 lg:space-y-10">
         <div className="flex items-center justify-between">
-          <h2 className="lg:text-xl uppercase tracking-wide font-normal flex items-center gap-2">
-            <PencilRuler size={24} strokeWidth={1} /> Measurements
-          </h2>
+          <div className="space-y-0.5">
+            <h2 className="text-lg text-templateBrown lg:text-xl uppercase tracking-wide font-medium flex items-center gap-2">
+              <PencilRuler size={20} /> Measurements
+            </h2>
+            <p className="text-xs font-light">Manage your saved measurements</p>
+          </div>
           <button
             onClick={() => setShowAddNew(true)}
             className="text-sm underline underline-offset-2"
