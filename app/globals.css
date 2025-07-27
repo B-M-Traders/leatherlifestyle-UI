@@ -154,3 +154,16 @@ html {
 .listHoverAnimation {
   @apply transition-all duration-200 ease-in-out hover:pl-1;
 }
+
+/* Hide scrollbar for WebKit and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}

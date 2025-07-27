@@ -37,13 +37,13 @@ const CustomSelect: React.FC<Props> = ({
         <select
           id={id}
           name={name}
-          value={value}
-          defaultValue={defaultValue}
+          value={value ?? defaultValue}
           required={required}
           disabled={disabled}
           onChange={onChange}
           className="w-full bg-transparent text-[#242424] text-sm border border-gray-400 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-gray-600 hover:border-gray-600 shadow-sm appearance-none cursor-pointer disabled:opacity-50"
         >
+          <option value="">Select...</option>
           {list.map((item, index) => (
             <option value={item.code} key={index}>
               {item.label}

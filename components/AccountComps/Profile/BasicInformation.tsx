@@ -1,16 +1,17 @@
 "use client";
+import CustomInput from "@/components/ui/custom-input";
 import React, { useState } from "react";
 
 const BasicInformation = () => {
   const [basicInfo, setBasicInfo] = useState({
-    firstName: "Ansari",
+    firstName: "Pasha",
     lastName: "Afroz",
     companyName: "Artisan Hide",
     email: "ansariafroz.py@gmail.com",
     phone: "7208820113",
   });
 
-  const handleBasicInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setBasicInfo((prev) => ({
       ...prev,
@@ -22,100 +23,46 @@ const BasicInformation = () => {
     e.preventDefault();
     console.log("Basic Info Submitted:", basicInfo);
   };
+
   return (
     <div className="space-y-4">
       <h3 className="font-light tracking-wide">BASIC INFORMATION</h3>
       <form className="space-y-3" onSubmit={handleBasicInfoSubmit}>
-        {/* First Name */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="firstName"
-            className="font-light text-sm text-gray-800"
-          >
-            First Name
-          </label>
-          <input
-            id="firstName"
+        <div className="grid grid-cols-2 gap-3 items-center">
+          <CustomInput
             name="firstName"
-            value={basicInfo.firstName}
-            onChange={handleBasicInfoChange}
             placeholder="First Name"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50 font-light"
-            type="text"
+            value={basicInfo.firstName}
+            onChange={handleInputChange}
           />
-        </div>
-
-        {/* Last Name */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="lastName"
-            className="font-light text-sm text-gray-800"
-          >
-            Last Name
-          </label>
-          <input
-            id="lastName"
+          <CustomInput
             name="lastName"
-            value={basicInfo.lastName}
-            onChange={handleBasicInfoChange}
             placeholder="Last Name"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50 font-light"
-            type="text"
+            value={basicInfo.lastName}
+            onChange={handleInputChange}
           />
         </div>
+        <CustomInput
+          name="companyName"
+          placeholder="Company Name"
+          value={basicInfo.companyName}
+          onChange={handleInputChange}
+        />
+        <CustomInput
+          name="email"
+          placeholder="Email"
+          type="email"
+          value={basicInfo.email}
+          onChange={handleInputChange}
+        />
+        <CustomInput
+          name="phone"
+          placeholder="Phone"
+          type="tel"
+          value={basicInfo.phone}
+          onChange={handleInputChange}
+        />
 
-        {/* Company Name */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="companyName"
-            className="font-light text-sm text-gray-800"
-          >
-            Company Name
-          </label>
-          <input
-            id="companyName"
-            name="companyName"
-            value={basicInfo.companyName}
-            onChange={handleBasicInfoChange}
-            placeholder="Company Name"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50 font-light"
-            type="text"
-          />
-        </div>
-
-        {/* Email */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="email" className="font-light text-sm text-gray-800">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            value={basicInfo.email}
-            onChange={handleBasicInfoChange}
-            placeholder="Email"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50 font-light"
-            type="email"
-          />
-        </div>
-
-        {/* Phone */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="phone" className="font-light text-sm text-gray-800">
-            Phone
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            value={basicInfo.phone}
-            onChange={handleBasicInfoChange}
-            placeholder="Phone"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50 font-light"
-            type="number"
-          />
-        </div>
-
-        {/* Submit Button */}
         <div>
           <button
             type="submit"

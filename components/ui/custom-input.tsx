@@ -63,7 +63,7 @@ const CustomInput: React.FC<Props> = ({
           {required ? (
             <span className="text-red-500">*</span>
           ) : (
-            <span className="text-gray-400 text-xs"> (Optional)</span>
+            <span className="text-gray-400 text-xs"></span>
           )}
         </label>
       </div>

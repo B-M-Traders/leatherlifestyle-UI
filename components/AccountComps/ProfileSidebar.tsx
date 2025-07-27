@@ -69,7 +69,7 @@ const ProfileSidebar = () => {
         </div>
       </div>
       <hr />
-      <div className="lg:space-y-2 overflow-x-scroll lg:overflow-auto flex gap-1.5 lg:flex-col">
+      <div className="lg:space-y-2 overflow-x-auto scrollbar-hide flex gap-1.5 lg:flex-col">
         {tabs.map((item, index) => {
           const isActive =
             pathname.includes(item.link) ||
@@ -78,10 +78,10 @@ const ProfileSidebar = () => {
           return (
             <Link
               key={index}
-              className={`border-2 rounded-md lg:rounded-none lg:border-x-0 lg:border-y-0 lg:border-l-4 inline-block px-5 lg:px-3 py-2.5 ${
+              className={`border-b-4 lg:border-x-0 lg:border-y-0 lg:border-l-4 inline-block px-5 lg:px-3 py-2 lg:py-2.5 ${
                 isActive
                   ? "border-templateBrown lg:bg-white text-templateBrown"
-                  : "border-gray-200 lg:border-white hover:bg-gray-100 hover:border-gray-300"
+                  : "border-gray-100 lg:border-white hover:bg-gray-100 hover:border-gray-300"
               }`}
               href={item.link}
             >

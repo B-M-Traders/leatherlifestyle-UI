@@ -1,19 +1,20 @@
 "use client";
+import CustomInput from "@/components/ui/custom-input";
+import CustomSelect from "@/components/ui/custom-select";
 import React, { useState } from "react";
 
 const countries = [
-  { code: "IN", name: "India" },
-  { code: "US", name: "United States" },
-  { code: "GB", name: "United Kingdom" },
-  { code: "CA", name: "Canada" },
-  { code: "AU", name: "Australia" },
-  // Add more as needed
+  { code: "IN", label: "India" },
+  { code: "US", label: "United States" },
+  { code: "GB", label: "United Kingdom" },
+  { code: "CA", label: "Canada" },
+  { code: "AU", label: "Australia" },
 ];
 
 const BillingAddress = () => {
   const [billing, setBilling] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: "Ansari",
+    lastName: "Afroz",
     company: "",
     address: "",
     apartment: "",
@@ -44,195 +45,78 @@ const BillingAddress = () => {
     <div className="space-y-4">
       <h3 className="font-light tracking-wide">BILLING ADDRESS</h3>
       <form className="space-y-3" onSubmit={handleSubmit}>
-        {/* First Name */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="firstName"
-            className="font-light text-sm text-gray-800"
-          >
-            First Name
-          </label>
-          <input
-            id="firstName"
+        <div className="grid grid-cols-2 gap-3 items-center">
+          <CustomInput
             name="firstName"
-            type="text"
+            placeholder="First Name"
             value={billing.firstName}
             onChange={handleChange}
-            placeholder="First Name"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
             required
           />
-        </div>
-
-        {/* Last Name */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="lastName"
-            className="font-light text-sm text-gray-800"
-          >
-            Last Name
-          </label>
-          <input
-            id="lastName"
+          <CustomInput
             name="lastName"
-            type="text"
+            placeholder="Last Name"
             value={billing.lastName}
             onChange={handleChange}
-            placeholder="Last Name"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
             required
           />
         </div>
+        <CustomInput
+          name="company"
+          placeholder="Company Name"
+          value={billing.company}
+          onChange={handleChange}
+        />
+        <CustomInput
+          name="address"
+          placeholder="Street Address"
+          value={billing.address}
+          onChange={handleChange}
+          required
+        />
+        <CustomInput
+          name="apartment"
+          placeholder="Apartment, suite, etc."
+          value={billing.apartment}
+          onChange={handleChange}
+        />
+        <CustomInput
+          name="postalCode"
+          placeholder="Postal Code"
+          value={billing.postalCode}
+          onChange={handleChange}
+          required
+        />
+        <CustomInput
+          name="city"
+          placeholder="City"
+          value={billing.city}
+          onChange={handleChange}
+          required
+        />
+        <CustomInput
+          name="province"
+          placeholder="State / Province"
+          value={billing.province}
+          onChange={handleChange}
+          required
+        />
+        <CustomSelect
+          name="country"
+          value={billing.country}
+          onChange={handleChange}
+          list={countries}
+          required
+        />
 
-        {/* Company */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="company" className="font-light text-sm text-gray-800">
-            Company
-          </label>
-          <input
-            id="company"
-            type="text"
-            name="company"
-            value={billing.company}
-            onChange={handleChange}
-            placeholder="Company"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-          />
-        </div>
+        <CustomInput
+          name="phone"
+          placeholder="Phone"
+          value={billing.phone}
+          onChange={handleChange}
+          required
+        />
 
-        {/* Address */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="address" className="font-light text-sm text-gray-800">
-            Address
-          </label>
-          <input
-            id="address"
-            type="text"
-            name="address"
-            value={billing.address}
-            onChange={handleChange}
-            placeholder="Street Address"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-            required
-          />
-        </div>
-
-        {/* Apartment */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="apartment"
-            className="font-light text-sm text-gray-800"
-          >
-            Apartment
-          </label>
-          <input
-            id="apartment"
-            type="text"
-            name="apartment"
-            value={billing.apartment}
-            onChange={handleChange}
-            placeholder="Apartment, suite, etc."
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-          />
-        </div>
-
-        {/* Postal Code */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="postalCode"
-            className="font-light text-sm text-gray-800"
-          >
-            Postal Code
-          </label>
-          <input
-            id="postalCode"
-            type="text"
-            name="postalCode"
-            value={billing.postalCode}
-            onChange={handleChange}
-            placeholder="Postal Code"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-            required
-          />
-        </div>
-
-        {/* City */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="city" className="font-light text-sm text-gray-800">
-            City
-          </label>
-          <input
-            id="city"
-            type="text"
-            name="city"
-            value={billing.city}
-            onChange={handleChange}
-            placeholder="City"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-            required
-          />
-        </div>
-
-        {/* Province */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label
-            htmlFor="province"
-            className="font-light text-sm text-gray-800"
-          >
-            Province / State
-          </label>
-          <input
-            id="province"
-            type="text"
-            name="province"
-            value={billing.province}
-            onChange={handleChange}
-            placeholder="State / Province"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-            required
-          />
-        </div>
-
-        {/* Country */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="country" className="font-light text-sm text-gray-800">
-            Country
-          </label>
-          <select
-            id="country"
-            name="country"
-            value={billing.country}
-            onChange={handleChange}
-            className="border px-3 py-2 col-span-2 rounded text-sm text-gray-700 focus:outline-none focus:border-templateBrown border-templateBrown/50"
-            required
-          >
-            <option value="">Select Country</option>
-            {countries.map((c) => (
-              <option key={c.code} value={c.name}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Phone */}
-        <div className="grid grid-cols-3 lg:grid-cols-4 items-center">
-          <label htmlFor="phone" className="font-light text-sm text-gray-800">
-            Phone
-          </label>
-          <input
-            id="phone"
-            type="number"
-            name="phone"
-            value={billing.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="border px-3 py-2 col-span-2 rounded text-sm focus:outline-none placeholder:font-light placeholder:text-xs focus:border-templateBrown border-templateBrown/50"
-            required
-          />
-        </div>
-
-        {/* Submit Button */}
         <div>
           <button
             type="submit"
