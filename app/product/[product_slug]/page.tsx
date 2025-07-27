@@ -19,10 +19,10 @@ const Productdetailpage = () => {
           <li>{productDetail.product_name}</li>
         </ul>
         <div className=" w-full flex flex-col lg:flex-row items-start gap-5 md:gap-10">
-          <div className="w-full lg:w-[63%]">
+          <div className="w-full lg:w-[65%]">
             <ImageGallery data={productDetail} />
           </div>
-          <div className="w-full lg:w-[37%]">
+          <div className="w-full lg:w-[35%]">
             <ProductInfo data={productDetail} />
           </div>
         </div>

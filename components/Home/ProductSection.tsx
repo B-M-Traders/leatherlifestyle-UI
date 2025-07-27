@@ -15,7 +15,7 @@ interface Props {
 
 const ProductSection: React.FC<Props> = ({ data }) => {
   return (
-    <div className="templateContainer space-y-8 py-6 md:py-10 lg:py-14">
+    <div className="templateContainer relative space-y-8 py-6 md:py-10 lg:py-14">
       <div className="space-y-0.5">
         <h2 className="text-center text-[24px] lg:text-[30px] tracking-tight font-normal text-templateBrown">
           {data.heading}

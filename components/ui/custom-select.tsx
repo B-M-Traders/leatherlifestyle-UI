@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   name: string;
   value?: string;
+  placeholder?: string;
   defaultValue?: string;
   required?: boolean;
   disabled?: boolean;
@@ -19,6 +20,7 @@ const CustomSelect: React.FC<Props> = ({
   className = "w-full",
   name,
   value,
+  placeholder = "Select an option",
   defaultValue,
   required = false,
   disabled = false,
@@ -27,7 +29,7 @@ const CustomSelect: React.FC<Props> = ({
   const id = `select-${name}`;
 
   return (
-    <div className={className}>
+    <div>
       {label && (
         <label htmlFor={id} className="block mb-1 text-xs text-gray-600">
           {label}
@@ -41,9 +43,11 @@ const CustomSelect: React.FC<Props> = ({
           required={required}
           disabled={disabled}
           onChange={onChange}
-          className="w-full bg-transparent text-[#242424] text-sm border border-gray-400 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-gray-600 hover:border-gray-600 shadow-sm appearance-none cursor-pointer disabled:opacity-50"
+          className={`${className} w-full bg-transparent text-[#242424] text-sm border border-gray-400 rounded-md px-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-gray-600 hover:border-gray-600 shadow-sm appearance-none cursor-pointer disabled:opacity-50`}
         >
-          <option value="">Select...</option>
+          <option value="" className="!text-xs">
+            {placeholder}
+          </option>
           {list.map((item, index) => (
             <option value={item.code} key={index}>
               {item.label}

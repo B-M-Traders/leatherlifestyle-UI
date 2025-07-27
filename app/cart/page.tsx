@@ -6,13 +6,18 @@ import React from "react";
 
 const Cart = () => {
   return (
-    <div className="templateContainer flex flex-col lg:flex-row gap-12 lg:gap-20 w-full py-6 md:py-10 lg:py-14">
-      <div className="lg:w-[67%] w-full">
-        <CartPageList />
-      </div>
-      <div className="lg:w-[33%] space-y-8 w-full">
-        <CartSummary />
-        <DiscountCode />
+    <div className="bg-[#F5F5F5]">
+      <div className="templateContainer flex flex-col lg:flex-row gap-10 lg:gap-14 w-full py-10 lg:py-14">
+        <div className="lg:w-[70%] w-full">
+          <CartPageList />
+        </div>
+        <div className="lg:w-[30%]">
+          <div className=" p-5 lg:p-8 bg-white space-y-8  rounded-2xl">
+            <DiscountCode />
+            <hr />
+            <CartSummary />
+          </div>
+        </div>
       </div>
     </div>
   );

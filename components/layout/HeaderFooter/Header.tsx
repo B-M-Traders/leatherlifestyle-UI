@@ -44,7 +44,7 @@ const Header: React.FC<Props> = ({ isHome }) => {
   return (
     <div
       className={`relative w-full transition-all ease-in-out ${
-        !isHome && "shadow-md"
+        !isHome && "shadow"
       } duration-300 ${
         toggle || hasScrolled
           ? "bg-white text-black"

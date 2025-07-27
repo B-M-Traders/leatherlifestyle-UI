@@ -14,6 +14,7 @@ import CustomInput from "../ui/custom-input";
 import CustomSelect from "../ui/custom-select";
 import { Button } from "../ui/button";
 import MeasurementCard from "./MeasurementCard";
+import { mockMeasurements } from "@/lib/mockData";
 
 const typeList = [
   { label: "Jacket", code: "jacket" },
@@ -28,44 +29,36 @@ const genderList = [
 ];
 
 type Measurement = {
+  id?: number | null;
   name: string;
   type: string;
   gender: string;
 };
 
-const defaultMeasurement: Measurement = {
-  name: "",
-  type: typeList[0].code,
-  gender: genderList[0].code,
-};
-
 const Measurements = () => {
   const [showAddNew, setShowAddNew] = useState(false);
-  const [measurementsList, setMeasurementsList] = useState<Measurement[]>([]);
-  const [newMeasurement, setNewMeasurement] =
-    useState<Measurement>(defaultMeasurement);
+  const [newMeasurement, setNewMeasurement] = useState<Measurement>({
+    name: "",
+    type: "",
+    gender: "",
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setNewMeasurement((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSelectChange =
-    (name: keyof Measurement) => (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (name: string) => (e: React.ChangeEvent<HTMLSelectElement>) => {
       setNewMeasurement((prev) => ({ ...prev, [name]: e.target.value }));
     };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setMeasurementsList((prev) => [...prev, newMeasurement]);
-    setNewMeasurement(defaultMeasurement);
-    setShowAddNew(false);
+    console.log("New Measurement Submitted:", newMeasurement);
   };
-
-  const labelForCode = (
-    code: string,
-    list: typeof typeList | typeof genderList
-  ) => list.find((l) => l.code === code)?.label ?? code;
 
   return (
     <>
@@ -85,9 +78,9 @@ const Measurements = () => {
           </button>
         </div>
 
-        {measurementsList.length > 0 && (
-          <ul className="text-sm space-y-2">
-            {measurementsList.map((item, idx) => (
+        {mockMeasurements.length > 0 && (
+          <ul className="text-sm space-y-4">
+            {mockMeasurements.map((item, idx) => (
               <React.Fragment key={idx}>
                 <MeasurementCard item={item} />
               </React.Fragment>

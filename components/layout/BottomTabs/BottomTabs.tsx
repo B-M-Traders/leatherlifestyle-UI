@@ -22,7 +22,7 @@ const BottomTabs = () => {
   if (pathname.includes("/product") || pathname.includes("/checkout"))
     return null;
   return (
-    <div className="lg:hidden select-none h-[65px] bg-white dark:bg-black border-t rounded-t-2xl grid grid-cols-5 fixed w-full bottom-0  left-0 my-auto bg-templateBackground text-templateText">
+    <div className="lg:hidden select-none h-[65px] bg-white dark:bg-black border-templateBrown/50 border-t rounded-t-2xl grid grid-cols-5 fixed w-full bottom-0  left-0 my-auto bg-templateBackground text-templateText">
       <Link
         href={"/"}
         className="grid gap-1 active:bg-gray-200 place-content-center place-items-center"

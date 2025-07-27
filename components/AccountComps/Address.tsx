@@ -145,7 +145,7 @@ const Address = () => {
             <div
               key={index}
               className={cn(
-                "border p-4 space-y-1.5",
+                "border p-4 rounded-xl space-y-1.5",
                 item.isDefault && "border-templateBrown/50"
               )}
             >
