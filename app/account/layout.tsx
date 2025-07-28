@@ -1,6 +1,4 @@
 import ProfileSidebar from "@/components/AccountComps/ProfileSidebar";
-import { MoveLeft } from "lucide-react";
-import Link from "next/link";
 import React from "react";
 
 const Mylayout = ({ children }: { children: React.ReactNode }) => {

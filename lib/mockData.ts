@@ -390,7 +390,7 @@ export const mockMeasurements = [
   {
     id: 2,
     name: "Afroz's Custom Jacket",
-    type: "jacket",
+    type: "pant",
     gender: "male",
   },
 ];

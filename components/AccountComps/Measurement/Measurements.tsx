@@ -1,6 +1,9 @@
 "use client";
 import { PencilRuler } from "lucide-react";
 import React, { useState } from "react";
+
+import MeasurementCard from "./MeasurementCard";
+import { mockMeasurements } from "@/lib/mockData";
 import {
   Dialog,
   DialogClose,
@@ -9,12 +12,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
-import CustomInput from "../ui/custom-input";
-import CustomSelect from "../ui/custom-select";
-import { Button } from "../ui/button";
-import MeasurementCard from "./MeasurementCard";
-import { mockMeasurements } from "@/lib/mockData";
+} from "@/components/ui/dialog";
+import CustomInput from "@/components/ui/custom-input";
+import CustomSelect from "@/components/ui/custom-select";
+import { Button } from "@/components/ui/button";
 
 const typeList = [
   { label: "Jacket", code: "jacket" },
