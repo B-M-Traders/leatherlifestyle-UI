@@ -11,7 +11,7 @@ const HeaderWrapper = () => {
   const pathname = usePathname();
   const { setGeolocation } = useGeolocationStore();
   const { loadCart } = useCart();
-  const isHome = pathname === "/";
+  const isHome = pathname === "/" || pathname === "/about";
 
   const getUserAddress = async () => {
     if (typeof window !== "undefined") {

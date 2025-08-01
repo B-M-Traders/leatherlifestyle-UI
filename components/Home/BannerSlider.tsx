@@ -6,7 +6,7 @@ const BannerSlider = () => {
     <div className="h-[75vh] lg:h-[85vh] w-full relative">
       <div className="h-full w-full hidden lg:block">
         <Image
-          src={"/banners/3.jpg"}
+          src={"/banners/3.webp"}
           alt={" Banner"}
           quality={100}
           sizes="100vw"

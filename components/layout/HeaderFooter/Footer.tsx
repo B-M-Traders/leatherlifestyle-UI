@@ -39,15 +39,15 @@ const footerSections: FooterSection[] = [
   {
     label: "LEGAL",
     list: [
-      { label: "About Us", link: "/about-us" },
-      { label: "Contact Us", link: "/contact-us" },
+      { label: "About Us", link: "/about" },
+      { label: "Contact Us", link: "/contact" },
       {
-        label: "Cancellation and Refund Policy",
-        link: "/policies/cancellation-and-refund-policy",
+        label: "Return and Refund Policy",
+        link: "/policy/return-and-refund-policy",
       },
-      { label: "Shipping Information", link: "/policies/shipping" },
-      { label: "Privacy policy", link: "/policies/privacy" },
-      { label: "Terms of service", link: "/policies/terms" },
+      { label: "Shipping Information", link: "/policy/shipping-policy" },
+      { label: "Privacy policy", link: "/policy/privacy-policy" },
+      { label: "Terms And Conditions", link: "/policy/terms-and-conditions" },
     ],
   },
   {
