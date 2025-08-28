@@ -105,7 +105,7 @@ const MobileMenu = () => {
                                 </AccordionTrigger>
                                 <AccordionContent>
                                   <ul className="pl-4 space-y-1">
-                                    {sub.lists.map((listItem, listIndex) => (
+                                    {sub?.lists?.map((listItem, listIndex) => (
                                       <li key={listIndex}>
                                         <Link
                                           href={listItem.url}
