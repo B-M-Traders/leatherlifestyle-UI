@@ -1,7 +1,14 @@
 import BasicProductCard from "@/components/Cards/BasicProductCard";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { featuredProducts, menuItems } from "@/lib/Menudata";
 import { useToggleStore } from "@/store/useToggleStore";
 import { ChevronRight, ChevronLeft, Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -58,92 +65,80 @@ const MobileMenu = () => {
       {toggleDrawer && (
         <div
           onClick={handleToggle}
-          className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm  z-10"
+          className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm z-10"
           // className="bg-black/30 backdrop-blur-sm fixed top-0 bottom-0 left-0 right-0 z-50 transition-transform duration-300 "
         />
       )}
 
       <div
-        className={`fixed text-black top-0 space-y-5 left-0 overflow-y-auto w-[85%] md:w-[50%] h-full bg-white z-30 p-5 transition-transform duration-300 ${
+        className={`fixed text-white top-0 space-y-5 left-0 overflow-y-auto w-[83%] md:w-[50%] h-full bg-templateBrown z-30 p-4 transition-transform duration-300 ${
           toggleDrawer ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="">
-          <Link href={"/"}>
-            <h2 className="text-4xl tracking-wide font-semibold">LOGO</h2>
-          </Link>
+        <div>
+          <X size={25} strokeWidth={1} />
         </div>
 
-        <hr />
-
-        {menuStack.length > 0 && (
-          <button onClick={goBack} className="flex items-center gap-1 text-sm">
-            <ChevronLeft size={18} /> Back
-          </button>
-        )}
-
-        {/* Top-level or nested list rendering */}
-        {Array.isArray(currentMenu) ? (
-          <div className="space-y-4">
-            {currentMenu.map((item: any, index: number) => {
-              if (item.type === "list") {
-                return (
-                  <div key={index} className="space-y-4 pb-4">
-                    <h4 className="text-[16px] text-templateBrown font-normal  mb-2">
-                      {item.title}
-                    </h4>
-                    <ul className="space-y-2">
-                      {item.lists.map((link: any, i: number) => (
-                        <Link onClick={handleToggle} href={link.url} key={i}>
-                          <li
-                            key={i}
-                            className={`text-[14px] cursor-pointer ${
-                              link.bold ? "font-semibold" : "font-light"
-                            }`}
-                          >
-                            {link.label}
-                          </li>
-                        </Link>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              }
-
-              return (
-                <div className="space-y-2" key={index}>
-                  {item.megamenu || item.dropdown ? (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between text-[15px] font-light cursor-pointer"
-                      onClick={() => openSubMenu(item)}
-                    >
+        <div>
+          {/* Top-level accordion */}
+          <Accordion type="single" className="" collapsible>
+            {menuItems.map((item, index) => (
+              <div key={index}>
+                {item.megamenu || item.dropdown ? (
+                  <AccordionItem value={`item-${index}`} className="">
+                    <AccordionTrigger className="text-[14px] uppercase hover:!no-underline !font-extralight tracking-wider">
                       {item.label}
-                      <ChevronRight size={16} />
-                    </div>
-                  ) : (
-                    <Link
-                      href={item.url || "#"}
-                      onClick={handleToggle}
-                      key={index}
-                      className="flex items-center justify-between text-[15px] font-light cursor-pointer"
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        ) : null}
+                    </AccordionTrigger>
 
-        <hr />
-        <div className="grid grid-cols-2 gap-4">
-          {featuredProducts.slice(0, 4).map((product, index) => (
-            <React.Fragment key={index}>
-              <BasicProductCard item={product as any} />
-            </React.Fragment>
-          ))}
+                    <AccordionContent className="text-sm">
+                      {/* Nested accordion for lists inside megamenu */}
+                      <Accordion type="single" collapsible>
+                        {item.megamenuItems?.map((sub, subIndex) => (
+                          <div key={subIndex} className="">
+                            {sub.type === "list" ? (
+                              <AccordionItem
+                                value={`sub-${index}-${subIndex}`}
+                                className=""
+                              >
+                                <AccordionTrigger className="text-[13px] uppercase font-extralight tracking-wide hover:!no-underline">
+                                  {sub.title}
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                  <ul className="pl-4 space-y-1">
+                                    {sub.lists.map((listItem, listIndex) => (
+                                      <li key={listIndex}>
+                                        <Link
+                                          href={listItem.url}
+                                          className={`block text-[13px] ${
+                                            listItem.bold
+                                              ? "font-semibold"
+                                              : "!font-extralight"
+                                          } hover:underline`}
+                                        >
+                                          {listItem.label}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </AccordionContent>
+                              </AccordionItem>
+                            ) : null}
+                          </div>
+                        ))}
+                      </Accordion>
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : (
+                  <Link
+                    className={`block py-2 text-[14px] uppercase hover:!no-underline !font-extralight tracking-wider pt-4`}
+                    href={item.url ?? "#"}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </Accordion>
         </div>
       </div>
     </div>

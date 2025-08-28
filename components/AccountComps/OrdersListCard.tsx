@@ -1,12 +1,22 @@
 import { useFormat } from "@/hooks/useFormat";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const OrdersListCard = () => {
+interface Props {
+  data: {
+    id: number;
+  };
+}
+
+const OrdersListCard: React.FC<Props> = ({ data }) => {
   const { formatAmount } = useFormat();
   return (
-    <div className="border hover:shadow-md cursor-pointer rounded-sm p-4 flex items-end justify-between">
+    <Link
+      href={`/order-detail?id=${data.id}`}
+      className="border hover:shadow-md cursor-pointer rounded-sm p-4 flex items-end justify-between"
+    >
       <div className="space-y-2">
         <Image
           src={"/men1.jpg"}
@@ -26,7 +36,7 @@ const OrdersListCard = () => {
         <p className="tracking-wide">{formatAmount(1500)}</p>
         <ChevronRight size={20} strokeWidth={1.5} />
       </div>
-    </div>
+    </Link>
   );
 };
 

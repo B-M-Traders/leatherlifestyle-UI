@@ -3,7 +3,8 @@ import React from "react";
 import OrdersListCard from "./OrdersListCard";
 
 const Orders = () => {
-  const orders: any[] = [{}];
+  const orders: any[] = [{ id: 100 }, { id: 200 }];
+
   return (
     <div className="space-y-5 lg:space-y-10">
       <div className="space-y-0.5">
@@ -14,9 +15,9 @@ const Orders = () => {
       </div>
       {orders.length > 0 ? (
         <div className="space-y-4">
-          {orders.map((item, index) => (
-            <React.Fragment key={index}>
-              <OrdersListCard />
+          {orders.map((item) => (
+            <React.Fragment key={item.id}>
+              <OrdersListCard data={item} />
             </React.Fragment>
           ))}
         </div>
