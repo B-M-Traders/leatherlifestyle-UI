@@ -61,7 +61,7 @@ const CustomInput: React.FC<Props> = ({
         />
         <label
           htmlFor={id}
-          className={`absolute cursor-text bg-white px-1 left-2.5 font-light text-gray-500 text-sm transition-all transform origin-left
+          className={`absolute cursor-text bg-white px-1 left-2.5 font-light text-gray-500 text-[13px] transition-all transform origin-left
             ${isFloating ? "-top-2 text-xs scale-90" : "top-3"}
             peer-focus:-top-2 peer-focus:text-xs peer-focus:scale-90`}
         >

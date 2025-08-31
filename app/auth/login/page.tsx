@@ -1,11 +1,17 @@
+import { AuthContainer } from "@/components/Auth/AuthContainer";
+import { AuthForm } from "@/components/Auth/AuthForm";
 import LoginForm from "@/components/Auth/LoginForm";
 import React from "react";
 
 const Login = () => {
   return (
-    <div className="py-6 md:py-10 lg:py-14">
-      <LoginForm />
-    </div>
+    <AuthContainer
+      title="Welcome back"
+      subtitle="Log in to continue"
+      footer={<span></span>}
+    >
+      <AuthForm variant="login" />
+    </AuthContainer>
   );
 };
 

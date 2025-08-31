@@ -13,6 +13,7 @@ import Image from "next/image";
 import CustomSelect from "@/components/ui/custom-select";
 import { Country } from "country-state-city";
 import { Item } from "@radix-ui/react-accordion";
+import { usePathname } from "next/navigation";
 
 interface FooterLink {
   label: string;
@@ -190,6 +191,7 @@ export const renderRegion = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   return (
     <div className={`w-[65%] space-y-2`}>
       <label className="block mb-1 text-xs">Select Origin</label>
@@ -252,6 +254,14 @@ export const renderRegion = () => {
 };
 
 const Footer: React.FC = () => {
+  const pathname = usePathname();
+  if (
+    pathname.includes("/auth/login") ||
+    pathname.includes("/auth/register") ||
+    pathname.includes("/forgot-password")
+  ) {
+    return null;
+  }
   return (
     <div className="bg-templateBrown pb-4 lg:pb-0">
       {/* Desktop Footer */}

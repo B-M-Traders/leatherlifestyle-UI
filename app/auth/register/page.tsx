@@ -1,11 +1,17 @@
+import { AuthContainer } from "@/components/Auth/AuthContainer";
+import { AuthForm } from "@/components/Auth/AuthForm";
 import RegisterForm from "@/components/Auth/RegisterForm";
 import React from "react";
 
 const Register = () => {
   return (
-    <div className="py-6 md:py-10 lg:py-14">
-      <RegisterForm />
-    </div>
+    <AuthContainer
+      title="Get Started"
+      subtitle="Create your account to begin"
+      footer={<span></span>}
+    >
+      <AuthForm variant="register" />
+    </AuthContainer>
   );
 };
 

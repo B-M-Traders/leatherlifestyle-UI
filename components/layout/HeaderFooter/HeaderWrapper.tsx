@@ -44,6 +44,13 @@ const HeaderWrapper = () => {
     getUserAddress();
   }, []);
 
+  if (
+    pathname.includes("/auth/login") ||
+    pathname.includes("/auth/register") ||
+    pathname.includes("/forgot-password")
+  ) {
+    return null;
+  }
   return (
     <div
       className={`${isHome ? "fixed" : "relative"} top-0 left-0 w-full z-10`}
