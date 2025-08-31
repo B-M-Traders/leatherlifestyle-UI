@@ -6,6 +6,8 @@ import BottomTabs from "@/components/layout/BottomTabs/BottomTabs";
 import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/layout/HeaderFooter/Footer";
 import { Toaster } from "react-hot-toast";
+import RegionModal from "@/components/Forms/RegionModal";
+import { cookies } from "next/headers";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -44,29 +46,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const regionCookie = cookieStore.get("region");
+  let initialRegion = null;
+
+  if (regionCookie) {
+    try {
+      initialRegion = JSON.parse(regionCookie.value);
+    } catch {
+      initialRegion = null;
+    }
+  }
   return (
     <html lang="en">
       <body
         className={`${BricolageGrotesque.className} antialiased pb-[55px] lg:pb-0`}
       >
         <Toaster />
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        > */}
         <NextTopLoader color="gray" showSpinner={false} />
         <HeaderWrapper />
         {children}
         <BottomTabs />
-        <Footer />
-        {/* </ThemeProvider> */}
+        <Footer initialRegion={initialRegion} />
       </body>
     </html>
   );
