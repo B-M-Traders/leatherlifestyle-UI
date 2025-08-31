@@ -2,11 +2,12 @@ export const menuItems = [
   {
     label: "Men",
     megamenu: true,
+    image: "/men2.jpg",
     dropdown: false,
     megamenuItems: [
       {
         type: "list",
-        title: "Shop by Category",
+        title: "Shop by Men Category",
         lists: [
           { label: "Leather Jackets", url: "/category/men/leather-jackets" },
           { label: "Leather Bottoms", url: "/category/men/leather-bottoms" },
@@ -51,11 +52,12 @@ export const menuItems = [
   {
     label: "Women",
     megamenu: true,
+    image: "/product2.jpg",
     dropdown: false,
     megamenuItems: [
       {
         type: "list",
-        title: "Shop by Category",
+        title: "Shop by Women Category",
         lists: [
           { label: "Leather Jackets", url: "/category/men/leather-jackets" },
           { label: "Leather Bottoms", url: "/category/men/leather-bottoms" },

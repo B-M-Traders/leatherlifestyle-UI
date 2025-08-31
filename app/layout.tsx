@@ -64,14 +64,12 @@ export default async function RootLayout({
   }
   return (
     <html lang="en">
-      <body
-        className={`${BricolageGrotesque.className} antialiased pb-[55px] lg:pb-0`}
-      >
+      <body className={`${BricolageGrotesque.className} antialiased`}>
         <Toaster />
         <NextTopLoader color="gray" showSpinner={false} />
         <HeaderWrapper />
         {children}
-        <BottomTabs />
+        {/* <BottomTabs /> */}
         <Footer initialRegion={initialRegion} />
       </body>
     </html>
