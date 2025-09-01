@@ -209,3 +209,28 @@ html {
     @apply text-amber-700 underline hover:text-amber-900;
   }
 }
+
+/* Change active page background + border */
+.custom-pagination .ant-pagination-item-active {
+  border-color: #4f3424 !important;
+  background-color: #4f3424 !important;
+}
+
+.custom-pagination .ant-pagination-item-active a {
+  color: #fff !important;
+}
+
+/* Change hover state */
+.custom-pagination .ant-pagination-item:hover {
+  border-color: #4f342472 !important;
+}
+
+.custom-pagination .ant-pagination-item:hover a {
+  color: #4f3424 !important;
+}
+
+/* Change prev/next arrows */
+.custom-pagination .ant-pagination-prev button,
+.custom-pagination .ant-pagination-next button {
+  color: #4f3424 !important;
+}

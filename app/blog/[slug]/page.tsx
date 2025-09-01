@@ -109,7 +109,7 @@ const Blogsinglepage = async ({ params }: pageProps) => {
 
       {/* Blog Header */}
       <div className="space-y-5">
-        <h1 className="text-2xl md:text-4xl font-medium text-templateBrown tracking-wide uppercase">
+        <h1 className="text-2xl md:text-[32px] font-medium text-templateBrown tracking-wide uppercase">
           {blog.title}
         </h1>
         <div className="flex text-sm tracking-wider items-center gap-1">
