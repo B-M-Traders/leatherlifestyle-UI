@@ -69,7 +69,8 @@ const BlogPageComp = () => {
         ) : (
           <>
             {blogData?.map((product, index) => (
-              <BlogCard key={index} />
+              <div>CARD</div>
+              // <BlogCard key={index} />
             ))}
           </>
         )}

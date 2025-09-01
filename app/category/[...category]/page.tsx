@@ -6,12 +6,14 @@ import React from "react";
 
 interface PageProps {
   params: Promise<{ category: string[] }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const getProducts = async (category: string[]) => {};
 
-const Category: React.FC<PageProps> = async ({ params }) => {
+const Category: React.FC<PageProps> = async ({ params, searchParams }) => {
   const categorySegments = (await params).category;
+  const page = (await searchParams).page;
   // const data = await getProducts(categorySegments);
   const lastCategory = categorySegments[categorySegments.length - 1];
 
@@ -21,6 +23,8 @@ const Category: React.FC<PageProps> = async ({ params }) => {
         heading={lastCategory.replace(/-/g, " ")}
         breadCrumb={["Home", "Category", ...categorySegments]}
       />
+
+      {JSON.stringify(page || "PAGE")}
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">

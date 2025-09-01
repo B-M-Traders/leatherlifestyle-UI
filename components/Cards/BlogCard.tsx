@@ -3,12 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const BlogCard = () => {
+interface Props {
+  data: {
+    slug: string;
+    thumbnail: string;
+    title: string;
+    uploadDate: string;
+  };
+}
+
+const BlogCard: React.FC<Props> = ({ data }) => {
   return (
-    <Link href={"/blog/blog_title"} className="block group space-y-3">
+    <Link href={`/blog/${data.slug}`} className="block group space-y-3">
       <div className="aspect-[4/3] overflow-hidden">
         <Image
-          src={"/mobileBanner.jpg"}
+          src={data.thumbnail || "/mobileBanner.jpg"}
           alt="Blog Image"
           height={300}
           width={600}
@@ -17,9 +26,9 @@ const BlogCard = () => {
       </div>
       <div className="space-y-2">
         <p className="text-xs flex items-center gap-1 font-medium tracking-wide text-templateBrown">
-          <Calendar size={15} strokeWidth={1} /> 24/05/2025
+          <Calendar size={15} strokeWidth={1} /> {data.uploadDate}
         </p>
-        <h2 className="font-light text-[15px]">Blog title</h2>
+        <h2 className="font-light text-[15px]">{data.title}</h2>
       </div>
     </Link>
   );

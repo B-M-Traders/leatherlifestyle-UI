@@ -85,7 +85,7 @@ export default function Home() {
         sizes="100vw"
         className="h-[250px] lg:h-[600px] object-cover object-center w-full"
       /> */}
-      {/* <div className="h-[300px] md:h-[400px] lg:h-[600px] w-full">
+      <div className="h-[300px] md:h-[400px] lg:h-[600px] w-full">
         <video
           muted
           loop
@@ -94,13 +94,12 @@ export default function Home() {
           className="h-full w-full object-cover"
           src="https://www.thejacketmaker.com/cdn/shop/videos/c/vp/b6b8ed414b754c10baf95cf8466c9d89/b6b8ed414b754c10baf95cf8466c9d89.HD-720p-4.5Mbps-48307499.mp4?v=0"
         ></video>
-      </div> */}
+      </div>
       <TrendingProducts />
       <NewArrivals />
       <OnSale />
       <GalleryWall items={gallery as any} />
       <Testimonials />
-
       <HomeBlog />
       <IconWithText data={podData} />
     </div>

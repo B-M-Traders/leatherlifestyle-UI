@@ -1,5 +1,6 @@
 import React from "react";
 import BlogCard from "../Cards/BlogCard";
+import { blogData } from "@/lib/blogData";
 
 const HomeBlog = () => {
   return (
@@ -13,10 +14,11 @@ const HomeBlog = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        {blogData.slice(0, 3).map((item, index) => (
+          <React.Fragment key={index}>
+            <BlogCard data={item} />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
